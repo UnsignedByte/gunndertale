@@ -3,15 +3,29 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 21:50:43, 24-Nov-2018
+ * @Last modified time: 09:54:26, 25-Nov-2018
  */
 
-var canv = document.getElementById('game');
-var context = canv.getContext("2d");
+function draw(){
+  
+}
 
-init();
+draw();
 
-function init(){
-  canv.width = window.innerWidth;
-  canv.height = window.innerHeight;
+function KEYPRESS_ACTIONS(code){
+  switch (code){
+    case 37:
+      mc.pos[1]--;
+      break;
+    case 38:
+      mc.pos[0]--;
+      break;
+    case 39:
+      mc.pos[1]++;
+      break;
+    case 40:
+      mc.pos[0]++;
+      break;
+    default:
+  }
 }
