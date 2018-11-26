@@ -3,9 +3,10 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 16:16:35, 25-Nov-2018
+ * @Last modified time: 17:14:49, 25-Nov-2018
  */
 
+console.log("js");
 function draw(){
   test_keypress();
 }

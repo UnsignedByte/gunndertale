@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 16:00:55, 25-Nov-2018
+ * @Last modified time: 17:14:38, 25-Nov-2018
  */
 
 
@@ -11,9 +11,11 @@
 
 //Init
 var mc;
+console.log("init");
+console.log(localStorage.getItem("mainchar"));
 if (localStorage.getItem("mainchar") === null) {
   mc = {
-    pos:[0, 0],
+    pos:[6, 110],
     dir:0, //0 = up, 1 = down, 2 = left, 3 = right
     animations:[
       ["0.png"],
@@ -22,6 +24,8 @@ if (localStorage.getItem("mainchar") === null) {
     ],
     map:"test_bg"
   }
+  window.localStorage.setItem("mainchar", JSON.stringify(mc));
+  console.log("eg");
 }else{
   mc = JSON.parse(window.localStorage.getItem("mainchar"));
 }
@@ -46,13 +50,6 @@ function init(){
  canv.width = window.innerWidth;
  canv.height = window.innerHeight;
 }
-
-function PARSE_MAP(){
-
-}
-
-
-
 
 //Event Listeners
 document.addEventListener("keydown", function(event) {
