@@ -3,29 +3,42 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 09:54:13, 25-Nov-2018
+ * @Last modified time: 16:00:55, 25-Nov-2018
  */
 
 
 
 
 //Init
-var mc = {
-  pos:[0, 0],
-  dir:0, //0 = up, 1 = down, 2 = left, 3 = right
-  animations:[
-    ["0.png"],
-    ["0.png"],
-    ["0.png"]
-  ]
+var mc;
+if (localStorage.getItem("mainchar") === null) {
+  mc = {
+    pos:[0, 0],
+    dir:0, //0 = up, 1 = down, 2 = left, 3 = right
+    animations:[
+      ["0.png"],
+      ["0.png"],
+      ["0.png"]
+    ],
+    map:"test_bg"
+  }
+}else{
+  mc = JSON.parse(window.localStorage.getItem("mainchar"));
 }
 
 var canv = document.getElementById('game');
 var context = canv.getContext("2d");
 
+var KEYS_DOWN = {
+  37:false,
+  38:false,
+  39:false,
+  40:false
+};
+
 //Constants
 
-const MC_HEIGHT_PERCENTAGE = 0.2;
+const BASE_FPS = 30;
 
 init();
 
@@ -35,7 +48,7 @@ function init(){
 }
 
 function PARSE_MAP(){
-  
+
 }
 
 
@@ -43,5 +56,12 @@ function PARSE_MAP(){
 
 //Event Listeners
 document.addEventListener("keydown", function(event) {
-  KEYPRESS_ACTIONS(event.which)
+  if (event.which in KEYS_DOWN){
+    KEYS_DOWN[event.which] = true;
+  }
+});
+document.addEventListener("keyup", function(event) {
+  if (event.which in KEYS_DOWN){
+    KEYS_DOWN[event.which] = false;
+  }
 });
