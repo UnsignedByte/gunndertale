@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 17:21:12, 25-Nov-2018
+ * @Last modified time: 18:25:31, 25-Nov-2018
  */
 
 var MAP_DATA = {
@@ -23,11 +23,9 @@ Object.keys(MAP_DATA).forEach(key => {
   let types = ["back", "front", "map"]
   for (let i = 0; i < types.length; i++){
     let img = new Image();
-    img.src = "../images/map/background/"+key+"/"+key+"-"+types[i]+".png";
+    img.src = "../images/map/"+key+"/"+key+"-"+types[i]+".png";
     img.onload = function() {
       MAP_DATA[key][types[i]] = img
     }
   }
 });
-
-console.log(MAP_DATA);

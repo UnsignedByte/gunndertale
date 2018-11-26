@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 17:14:38, 25-Nov-2018
+ * @Last modified time: 18:30:46, 25-Nov-2018
  */
 
 
@@ -11,21 +11,13 @@
 
 //Init
 var mc;
-console.log("init");
-console.log(localStorage.getItem("mainchar"));
 if (localStorage.getItem("mainchar") === null) {
   mc = {
     pos:[6, 110],
-    dir:0, //0 = up, 1 = down, 2 = left, 3 = right
-    animations:[
-      ["0.png"],
-      ["0.png"],
-      ["0.png"]
-    ],
+    dir:[0, 0], //0 = up, 1 = down, 2 = left, 3 = right
     map:"test_bg"
   }
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
-  console.log("eg");
 }else{
   mc = JSON.parse(window.localStorage.getItem("mainchar"));
 }
@@ -43,6 +35,7 @@ var KEYS_DOWN = {
 //Constants
 
 const BASE_FPS = 30;
+const MOV_SPEED = 0.5;
 
 init();
 

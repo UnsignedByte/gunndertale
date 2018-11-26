@@ -3,12 +3,13 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 17:14:49, 25-Nov-2018
+ * @Last modified time: 12:44:55, 26-Nov-2018
  */
 
-console.log("js");
 function draw(){
+  context.clearRect(0, 0, canv.width, canv.height)
   test_keypress();
+  Window.render();
 }
 
 function minute(){
@@ -23,16 +24,16 @@ function test_keypress(){
     if (KEYS_DOWN[key] === true){
       switch (key){
         case 37:
-          mc.pos[1]--;
+          mc.pos[1]-=MOV_SPEED;
           break;
         case 38:
-          mc.pos[0]--;
+          mc.pos[0]-=MOV_SPEED;
           break;
         case 39:
-          mc.pos[1]++;
+          mc.pos[1]+=MOV_SPEED;
           break;
         case 40:
-          mc.pos[0]++;
+          mc.pos[0]+=MOV_SPEED;
           break;
         default:
       }
