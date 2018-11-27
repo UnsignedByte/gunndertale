@@ -40,8 +40,9 @@ const MOV_SPEED = 2;
 init();
 
 function init(){
- canv.width = window.innerWidth;
- canv.height = window.innerHeight;
+    /*Double size cuz stupid bug lol*/
+ canv.width = window.innerWidth * 2;
+ canv.height = window.innerHeight * 2;
 }
 
 //Event Listeners
