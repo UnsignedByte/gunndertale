@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 18:25:31, 25-Nov-2018
+ * @Last modified time: 12:59:39, 26-Nov-2018
  */
 
 var MAP_DATA = {
@@ -17,8 +17,6 @@ var MAP_DATA = {
   }
 }
 
-// var image_load_canvas = document.createElement('canvas');
-// var image_load_ctx = image_load_canvas.getContext("2d");
 Object.keys(MAP_DATA).forEach(key => {
   let types = ["back", "front", "map"]
   for (let i = 0; i < types.length; i++){
