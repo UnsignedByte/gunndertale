@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 09:53:14, 27-Nov-2018
+ * @Last modified time: 10:29:58, 27-Nov-2018
  */
 
 
@@ -23,7 +23,24 @@ if (localStorage.getItem("mainchar") === null) {
 }
 
 var canv = document.getElementById('game');
-var context = canv.getContext("2d");
+
+function setupCanvas(canvas) {
+  // Get the device pixel ratio, falling back to 1.
+  var dpr = window.devicePixelRatio || 1;
+  // Get the size of the canvas in CSS pixels.
+  var rect = canvas.getBoundingClientRect();
+  // Give the canvas pixel dimensions of their CSS
+  // size * the device pixel ratio.
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  var ctx = canvas.getContext('2d');
+  // Scale all drawing operations by the dpr, so you
+  // don't have to worry about the difference.
+  ctx.scale(dpr, dpr);
+  return ctx;
+}
+
+var context = setupCanvas(canv);
 
 var KEYS_DOWN = {
   37:false,

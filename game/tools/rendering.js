@@ -3,15 +3,15 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 23:36:45, 26-Nov-2018
+ * @Last modified time: 10:23:52, 27-Nov-2018
  */
 
 var Window = (function(){
   var self = {};
 
   self.height = 256;
-  self.zoom = window.innerHeight/self.height;
-  self.width = window.innerWidth/self.zoom;
+  self.zoom = canv.height/self.height;
+  self.width = canv.width/self.zoom;
 
   function get_window_pos(){
     return [Math.max(Math.min(0, self.width/2-mc.pos[0]), self.width-MAP_DATA[mc.map].back.width),
