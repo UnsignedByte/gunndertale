@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 23:33:41, 26-Nov-2018
+ * @Last modified time: 23:36:45, 26-Nov-2018
  */
 
 var Window = (function(){
@@ -14,8 +14,8 @@ var Window = (function(){
   self.width = window.innerWidth/self.zoom;
 
   function get_window_pos(){
-    return [Math.max(Math.min(0, self.width/2-mc.pos[0]), -MAP_DATA[mc.map].back.width+self.width),
-    Math.max(Math.min(0, self.height/2-mc.pos[1]), -MAP_DATA[mc.map].back.height+self.height)];
+    return [Math.max(Math.min(0, self.width/2-mc.pos[0]), self.width-MAP_DATA[mc.map].back.width),
+    Math.max(Math.min(0, self.height/2-mc.pos[1]), self.height-MAP_DATA[mc.map].back.height)];
   }
 
   function drawImage(im, xy){
