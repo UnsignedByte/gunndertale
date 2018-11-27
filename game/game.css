@@ -14,3 +14,10 @@ body {
   height: 100%;
   margin: 0;
 }
+
+
+#game {
+    /*Set scale to resize, this will result in better resolution*/
+    transform: scale(0.5) translate(-50%, -50%);
+    position: fixed;
+}
