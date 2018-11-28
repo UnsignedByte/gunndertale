@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 22:39:44, 27-Nov-2018
+ * @Last modified time: 22:46:03, 27-Nov-2018
  */
 
 var game_anim_dir_mod = 0;
@@ -51,7 +51,7 @@ function test_keypress(){
       }
     }
   });
-  if (game_anim_dir_mod%10===0){
+  if (game_anim_dir_mod===0){
     mc.dir[1]++;
     if (is_moving){
       mc.dir[1]%=MC_DATA.animations[0].length;
@@ -61,6 +61,7 @@ function test_keypress(){
   }
   if(is_moving){
     game_anim_dir_mod++;
+    game_anim_dir_mod%=FRAMES_BEFORE_WALK;
   }else{
     game_anim_dir_mod=0;
   }

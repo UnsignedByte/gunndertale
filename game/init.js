@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 22:17:53, 27-Nov-2018
+ * @Last modified time: 22:48:22, 27-Nov-2018
  */
 
 
@@ -16,7 +16,7 @@ if (localStorage.getItem("mainchar") === null) {
     pos:[6, 110],
     dir:[0, 0],
     map:"test_bg",
-    currAnim:None
+    currAnim:null
   }
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
 }else{
@@ -54,6 +54,7 @@ var KEYS_DOWN = {
 
 const BASE_FPS = 60;
 const MOV_SPEED = 1.5;
+const FRAMES_BEFORE_WALK = 10;
 
 init();
 
