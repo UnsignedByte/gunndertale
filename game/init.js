@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 10:29:58, 27-Nov-2018
+ * @Last modified time: 22:17:53, 27-Nov-2018
  */
 
 
@@ -14,8 +14,9 @@ var mc;
 if (localStorage.getItem("mainchar") === null) {
   mc = {
     pos:[6, 110],
-    dir:[0, 0], //0 = up, 1 = down, 2 = left, 3 = right
-    map:"test_bg"
+    dir:[0, 0],
+    map:"test_bg",
+    currAnim:None
   }
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
 }else{
@@ -51,8 +52,8 @@ var KEYS_DOWN = {
 
 //Constants
 
-const BASE_FPS = 30;
-const MOV_SPEED = 2;
+const BASE_FPS = 60;
+const MOV_SPEED = 1.5;
 
 init();
 

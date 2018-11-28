@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 10:23:52, 27-Nov-2018
+ * @Last modified time: 19:16:21, 27-Nov-2018
  */
 
 var Window = (function(){
@@ -12,6 +12,9 @@ var Window = (function(){
   self.height = 256;
   self.zoom = canv.height/self.height;
   self.width = canv.width/self.zoom;
+
+  self.invis_canv = document.createElement('canvas');
+  self.invis_canv_context = self.invis_canv.getContext('2d');
 
   function get_window_pos(){
     return [Math.max(Math.min(0, self.width/2-mc.pos[0]), self.width-MAP_DATA[mc.map].back.width),
@@ -28,9 +31,14 @@ var Window = (function(){
   self.render = function(){
     let win_pos = get_window_pos();
     drawImage(MAP_DATA[mc.map].back, [0, 0]);
-    drawImage(MC_DATA.animations[mc.dir[0]][mc.dir[1]], mc.pos)
+    drawImage(mc.currAnim, mc.pos)
+    drawImage(MAP_DATA[mc.map].front, [0, 0]);
+  }
 
-    MAP_DATA[mc.map];
+  self.get_map = function(){
+    self.invis_canv_context.width = MAP_DATA[mc.map].map.width;
+    self.invis_canv_context.height = MAP_DATA[mc.map].map.height;
+    invis_canv_context.drawImage(MAP_DATA[mc.map].map, 0, 0);
   }
 
   return self;
