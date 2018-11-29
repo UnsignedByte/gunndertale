@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 22:48:22, 27-Nov-2018
+ * @Last modified time: 22:57:57, 28-Nov-2018
  */
 
 
@@ -53,7 +53,7 @@ var KEYS_DOWN = {
 //Constants
 
 const BASE_FPS = 60;
-const MOV_SPEED = 1.5;
+const MOV_SPEED = 1;
 const FRAMES_BEFORE_WALK = 10;
 
 init();
