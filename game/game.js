@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 23:04:00, 28-Nov-2018
+ * @Last modified time: 23:08:30, 28-Nov-2018
  */
 
 var game_anim_dir_mod = 0;
@@ -35,26 +35,32 @@ function test_keypress(){
           switch (key){
             case "37":
               mc.pos[0]-=MOV_SPEED;
-              mc.dir[0] = 2;
               break;
             case "38":
               mc.pos[1]-=MOV_SPEED;
-              mc.dir[0] = 1;
               break;
             case "39":
               mc.pos[0]+=MOV_SPEED;
-              mc.dir[0] = 3;
               break;
             case "40":
               mc.pos[1]+=MOV_SPEED;
-              mc.dir[0] = 0;
               break;
           }
         }
-      }else{
-        switch (key){
-          default:
-        }
+      }
+      switch (key){
+        case "37":
+          mc.dir[0] = 2;
+          break;
+        case "38":
+          mc.dir[0] = 1;
+          break;
+        case "39":
+          mc.dir[0] = 3;
+          break;
+        case "40":
+          mc.dir[0] = 0;
+          break;
       }
     }
   });
