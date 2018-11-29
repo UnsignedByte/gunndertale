@@ -8,6 +8,9 @@
 
 var game_anim_dir_mod = 0;
 
+//no more blurring! :)
+context.imageSmoothingEnabled = false;
+
 function draw(){
   context.clearRect(0, 0, canv.width, canv.height)
 
