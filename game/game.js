@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 23:08:30, 28-Nov-2018
+ * @Last modified time: 23:18:29, 28-Nov-2018
  */
 
 var game_anim_dir_mod = 0;
@@ -11,11 +11,12 @@ var curr_collision_data = [false, false, false, false];
 
 function draw(){
   context.clearRect(0, 0, canv.width, canv.height)
+  mc.currAnim=MC_DATA.animations[mc.dir[0]][mc.dir[1]];
 
   curr_collision_data = Collision.check_collide();
   test_keypress();
-  mc.currAnim=MC_DATA.animations[mc.dir[0]][mc.dir[1]];
   Window.render();
+  Collision.enter_doors();
 }
 
 function minute(){
