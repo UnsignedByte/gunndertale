@@ -18,6 +18,9 @@ var Game = (function(){
 
 Game.curr_action_type = "game";
 
+//no more blurring! :)
+context.imageSmoothingEnabled = false;
+
 function draw(){
   context.clearRect(0, 0, canv.width, canv.height)
   if (Game.curr_action_type === "game"){
