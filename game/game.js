@@ -9,6 +9,9 @@
 var game_anim_dir_mod = 0;
 var curr_collision_data = [false, false, false, false];
 
+//no more blurring! :)
+context.imageSmoothingEnabled = false;
+
 function draw(){
   context.clearRect(0, 0, canv.width, canv.height)
   mc.currAnim=MC_DATA.animations[mc.dir[0]][mc.dir[1]];
