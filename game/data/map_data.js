@@ -3,16 +3,22 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 23:37:13, 28-Nov-2018
+ * @Last modified time: 09:49:17, 30-Nov-2018
  */
 
 var MAP_DATA = {
   "test_bg":{
     doors:{
-      0xFF0000:["test_bg", 450, 150],
+      0xFF0000:["test_bg_2", 740, 120],
       0x0000FF:["test_bg", 320, 25],
-      0x00FF00:["test_bg", 11, 150],
+      0x00FF00:["test_bg_2", 10, 120],
       0xFFFF00:["test_bg", 320, 290]
+    }
+  },
+  "test_bg_2":{
+    doors:{
+      0xFF0000:["test_bg", 450, 150],
+      0xFFFF00:["test_bg", 11, 150]
     }
   }
 }
@@ -23,7 +29,7 @@ Object.keys(MAP_DATA).forEach(key => {
     let img = new Image();
     img.src = "../images/map/"+key+"/"+key+"-"+types[i]+".png";
     img.onload = function() {
-      MAP_DATA[key][types[i]] = img
+      MAP_DATA[key][types[i]] = img;
     }
   }
 });
