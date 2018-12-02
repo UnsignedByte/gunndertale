@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 16:35:21, 01-Dec-2018
+ * @Last modified time: 17:19:13, 01-Dec-2018
  */
 
 var Window = (function(){
@@ -39,6 +39,34 @@ var Window = (function(){
     self.invis_canv_context.width = MAP_DATA[mc.map].map.width;
     self.invis_canv_context.height = MAP_DATA[mc.map].map.height;
     invis_canv_context.drawImage(MAP_DATA[mc.map].map, 0, 0);
+  }
+
+  return self;
+}());
+
+var Effects = (function(){
+  var self = {};
+
+  var Vars = {
+    darken_opacity:0,
+    darken_rate:0.05
+  };
+
+  self.darken = function(){
+    Vars.darken_opacity+=Vars.darken_rate;
+    if (Vars.darken_opacity>1.25){
+      Vars.darken_rate*=-1;
+      mc.map = Game.cmde[0];
+      mc.pos = [Game.cmde[1], Game.cmde[2]];
+      Game.cmde = null;
+    }else if (Vars.darken_opacity<0){
+      Vars.darken_opacity = 0;
+      Vars.darken_rate*=-1;
+      Game.curr_action_type="game";
+    }
+    context.fillStyle="rgba(0, 0, 0, "+Vars.darken_opacity+")"
+    context.fillRect(0, 0, canv.width, canv.height);
+    // context.stroke();
   }
 
   return self;

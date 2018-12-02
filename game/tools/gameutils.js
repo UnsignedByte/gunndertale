@@ -3,23 +3,16 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 16:38:49, 01-Dec-2018
+ * @Last modified time: 17:18:38, 01-Dec-2018
  */
 
-var Game = (function(){
- var self = {};
+var Game = {
+  game_anim_dir_mod:0,
+  curr_collision_data:[false, false, false, false],
+  curr_action_type:"game",
+  cmde:null
+}
 
- self.game_anim_dir_mod = 0;
- self.curr_collision_data = [false, false, false, false];
- self.curr_action_type = "game";
-
- return self;
-});
-
-Game.curr_action_type = "game";
-
-//no more blurring! :)
-context.imageSmoothingEnabled = false;
 
 function test_keypress(){
   let is_moving = false;
