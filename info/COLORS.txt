@@ -5,7 +5,4 @@ Wood
  Main		#960
  Side		#740
  Outline	#420
-
--Cabinets
- -One open
--Bookshelf
+ Hole		#530
