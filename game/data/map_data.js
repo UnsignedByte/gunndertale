@@ -9,16 +9,16 @@
 var MAP_DATA = {
   "test_bg":{
     doors:{
-      0xFF0000:["test_bg_2", 740, 120],
-      0x0000FF:["test_bg", 320, 25],
-      0x00FF00:["bedroom", 10, 120],
+      0xFF0000:["bedroom", 127, 157],
+      0x0000FF:["test_bg_2", 740, 120],
+      0x00FF00:["test_bg_2", 10, 120],
       0xFFFF00:["test_bg", 320, 290]
     }
   },
   "test_bg_2":{
     doors:{
       0xFF0000:["test_bg", 450, 150],
-      0x0000FF:["test_bg", 11, 150]
+      0x0000FF:["test_bg", 320, 290]
     }
   },
     "bedroom": {
