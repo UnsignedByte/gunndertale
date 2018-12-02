@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 09:47:25, 30-Nov-2018
+ * @Last modified time: 16:35:21, 01-Dec-2018
  */
 
 var Window = (function(){
@@ -30,7 +30,7 @@ var Window = (function(){
 
   self.render = function(){
     let win_pos = get_window_pos();
-    drawImage(MAP_DATA[mc.map].map, [0, 0]);
+    drawImage(MAP_DATA[mc.map].back, [0, 0]);
     drawImage(mc.currAnim, mc.pos);
     drawImage(MAP_DATA[mc.map].front, [0, 0]);
   }
