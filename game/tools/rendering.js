@@ -3,13 +3,13 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 17:19:13, 01-Dec-2018
+ * @Last modified time: 22:58:15, 01-Dec-2018
  */
 
 var Window = (function(){
   var self = {};
 
-  self.height = 256;
+  self.height = 192;
   self.zoom = canv.height/self.height;
   self.width = canv.width/self.zoom;
 
@@ -17,8 +17,15 @@ var Window = (function(){
   self.invis_canv_context = self.invis_canv.getContext('2d');
 
   function get_window_pos(){
-    return [Math.max(Math.min(0, self.width/2-mc.pos[0]), self.width-MAP_DATA[mc.map].back.width),
-    Math.max(Math.min(0, self.height/2-mc.pos[1]), self.height-MAP_DATA[mc.map].back.height)];
+    let xpos = Math.max(Math.min(0, self.width/2-mc.pos[0]), self.width-MAP_DATA[mc.map].back.width);
+    if (MAP_DATA[mc.map].back.width < self.width){
+      xpos-=(self.width-MAP_DATA[mc.map].back.width)/2;
+    }
+    let ypos = Math.max(Math.min(0, self.height/2-mc.pos[1]), self.height-MAP_DATA[mc.map].back.height);
+    // if (MAP_DATA[mc.map].back.height < self.height){
+    //   ypos-=(self.width-MAP_DATA[mc.map].back.width)/2;
+    // }
+    return [xpos, ypos];
   }
 
   function drawImage(im, xy){

@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 17:18:16, 01-Dec-2018
+ * @Last modified time: 23:01:39, 01-Dec-2018
  */
 
 var Collision = (function(){
@@ -46,7 +46,11 @@ var Collision = (function(){
   self.check_collide = function(){
    self.map_data = self.get_map_data();
    // return [false, false, false, false];
-   return check_rect_player(MOV_SPEED, 0);
+   return [c_c(mc.pos[0]-MOV_SPEED, mc.pos[1]+mc.currAnim.height, 0, 0),
+           c_c(mc.pos[0], mc.pos[1]-2*MOV_SPEED+mc.currAnim.height, mc.currAnim.width, 0),
+           c_c(mc.pos[0]+mc.currAnim.width+MOV_SPEED, mc.pos[1]+mc.currAnim.height, 0, 0),
+           c_c(mc.pos[0], mc.pos[1]+MOV_SPEED+mc.currAnim.height, mc.currAnim.width, 0)]
+   // return check_rect_player(MOV_SPEED, 0);
   }
 
   self.check_doors = function(){
