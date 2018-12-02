@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 09:49:17, 30-Nov-2018
+ * @Last modified time: 16:34:17, 01-Dec-2018
  */
 
 var MAP_DATA = {
@@ -18,7 +18,7 @@ var MAP_DATA = {
   "test_bg_2":{
     doors:{
       0xFF0000:["test_bg", 450, 150],
-      0xFFFF00:["test_bg", 11, 150]
+      0x0000FF:["test_bg", 11, 150]
     }
   },
     "bedroom": {

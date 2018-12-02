@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 23:10:21, 28-Nov-2018
+ * @Last modified time: 17:03:11, 01-Dec-2018
  */
 
 
@@ -42,6 +42,7 @@ function setupCanvas(canvas) {
 }
 
 var context = setupCanvas(canv);
+
 
 var KEYS_DOWN = {
   37:false,
