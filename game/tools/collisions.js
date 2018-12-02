@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 09:56:57, 30-Nov-2018
+ * @Last modified time: 17:18:16, 01-Dec-2018
  */
 
 var Collision = (function(){
@@ -45,20 +45,17 @@ var Collision = (function(){
 
   self.check_collide = function(){
    self.map_data = self.get_map_data();
-   document.getElementById("debug").appendChild(self.map_data);
    // return [false, false, false, false];
    return check_rect_player(MOV_SPEED, 0);
   }
 
-  self.enter_doors = function(){
+  self.check_doors = function(){
     let currmapdoors = MAP_DATA[mc.map].doors
     Object.keys(currmapdoors).forEach(key => {
-      console.log(get_col_at_pix(mc.pos[0]+32, mc.pos[1]));
       let rect_check = check_rect_player(0, Number(key));
       if (rect_check[0] || rect_check[1] || rect_check[2] || rect_check[3]){
-        let cmde = currmapdoors[key];
-        mc.map = cmde[0];
-        mc.pos = [cmde[1], cmde[2]];
+        Game.curr_action_type = "darken";
+        Game.cmde = currmapdoors[key];
       }
     });
   }
