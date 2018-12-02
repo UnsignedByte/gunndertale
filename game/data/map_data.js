@@ -11,7 +11,7 @@ var MAP_DATA = {
     doors:{
       0xFF0000:["test_bg_2", 740, 120],
       0x0000FF:["test_bg", 320, 25],
-      0x00FF00:["test_bg_2", 10, 120],
+      0x00FF00:["bedroom", 10, 120],
       0xFFFF00:["test_bg", 320, 290]
     }
   },
@@ -20,7 +20,12 @@ var MAP_DATA = {
       0xFF0000:["test_bg", 450, 150],
       0xFFFF00:["test_bg", 11, 150]
     }
-  }
+  },
+    "bedroom": {
+        doors: {
+            0xffff00: ["test_bg", 11, 150]
+        }
+    }
 }
 
 Object.keys(MAP_DATA).forEach(key => {
