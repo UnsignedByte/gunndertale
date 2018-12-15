@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 12:03:42, 14-Dec-2018
+ * @Last modified time: 00:28:09, 15-Dec-2018
  */
 
 var MAP_DATA = {
@@ -32,10 +32,22 @@ var MAP_DATA = {
           ["You don't need to sleep yet."],
           ["You look closely.", "It's still a bed."]
         ]
+      },
+      0x00FF00: {
+        dir:1,
+        responses:[
+          ["There are books.", "But unfortunately you can't read."],
+          ["You look behind the books.", "There are more books."]
+        ]
       }
     }
   }
 }
+
+
+
+
+
 
 Object.keys(MAP_DATA).forEach(key => {
   let types = ["back", "front", "map"]

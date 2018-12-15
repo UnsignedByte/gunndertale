@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 00:19:55, 15-Dec-2018
+ * @Last modified time: 00:28:36, 15-Dec-2018
  */
 
 var Collision = (function(){
@@ -34,7 +34,7 @@ var Collision = (function(){
         //front
         break;
       case 1:
-        return c_c(mc.pos[0], mc.pos[1]-2*dst+mc.currAnim.height, mc.currAnim.width, 0, match_col);
+        return c_c(mc.pos[0], mc.pos[1]-dst+mc.currAnim.height, mc.currAnim.width, 0, match_col);
         //back
         break;
       case 2:
