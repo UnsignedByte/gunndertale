@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 16:34:17, 01-Dec-2018
+ * @Last modified time: 12:03:42, 14-Dec-2018
  */
 
 var MAP_DATA = {
@@ -21,11 +21,20 @@ var MAP_DATA = {
       0x0000FF:["test_bg", 320, 290]
     }
   },
-    "bedroom": {
-        doors: {
-            0xffff00: ["test_bg", 11, 150]
-        }
+  "bedroom": {
+    doors: {
+      0xFFFF00: ["test_bg", 11, 150]
+    },
+    actions: {
+      0xFF0000: {
+        dir:2,
+        responses:[
+          ["You don't need to sleep yet."],
+          ["You look closely.", "It's still a bed."]
+        ]
+      }
     }
+  }
 }
 
 Object.keys(MAP_DATA).forEach(key => {

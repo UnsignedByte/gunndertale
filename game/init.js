@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 17:03:11, 01-Dec-2018
+ * @Last modified time: 10:15:15, 11-Dec-2018
  */
 
 
@@ -13,9 +13,9 @@
 var mc;
 if (localStorage.getItem("mainchar") === null) {
   mc = {
-    pos:[300, 155],
+    pos:[127, 157],
     dir:[0, 0],
-    map:"test_bg",
+    map:"bedroom",
     currAnim:null
   }
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
@@ -48,8 +48,11 @@ var KEYS_DOWN = {
   37:false,
   38:false,
   39:false,
-  40:false
+  40:false,
+  13:false
 };
+
+const SWITCH_DIRS = [2, 1, 3, 0];
 
 //Constants
 
