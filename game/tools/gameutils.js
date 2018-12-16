@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 00:22:34, 15-Dec-2018
+ * @Last modified time: 17:16:21, 15-Dec-2018
  */
 
 var Game = {
@@ -57,7 +57,13 @@ function test_keypress(){
           KEYS_DOWN[key]=false;
           switch(key){
             case "13":
-              ActionList.next();
+              if(Effects.pub_vars.text.done){
+                ActionList.next();
+                Effects.pub_vars.text.done = "pending";
+              }
+              break;
+            case "88":
+              Effects.pub_vars.text.done = true;
               break;
             default:
           }
@@ -95,7 +101,6 @@ var ActionList = (function(){
   self.next = function(){
     let lastpos = Game.text.pos.pop()
     let lastm = self.get_pos();
-    console.log(lastm, lastpos);
 
     Game.text.pos.push(lastpos+1);
     if (lastm.length === lastpos+1){
@@ -104,12 +109,9 @@ var ActionList = (function(){
     }
     if(typeof lastm[lastpos+1]=== 'string'){
     }else if (Array.isArray(lastm[lastpos+1])){
-      console.log("oh wow");
       Game.text.pos.push(randInt(0,lastm[lastpos+1].length));
       Game.text.pos.push(0);
     }
-
-    console.log(Game.text);
   }
 
   return self;

@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 00:13:10, 15-Dec-2018
+ * @Last modified time: 17:14:38, 15-Dec-2018
  */
 
 var Window = (function(){
@@ -53,6 +53,12 @@ var Window = (function(){
 
 var Effects = (function(){
   var self = {};
+
+  self.pub_vars = {
+    text:{
+      done:false
+    }
+  }
 
   var Vars = {
     darken:{
@@ -109,9 +115,21 @@ var Effects = (function(){
     draw_text_box();
     context.fillStyle = "white";
     context.font = Vars.text.font_size.toString()+"px VT323";
+
     let gp = ActionList.get_pos();
-    if (typeof gp === 'string'){
-      context.fillText(gp, (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
+    Vars.text.pos++;
+    switch(self.pub_vars.text.done){
+      case "pending":
+        self.pub_vars.text.done = false;
+        Vars.text.pos=0;
+        break;
+      case true:
+        Vars.text.pos = gp.length*Vars.text.num_frames
+    }
+    let last = Math.ceil(Vars.text.pos/Vars.text.num_frames)+1;
+    context.fillText(gp.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
+    if(last > gp.length){
+      self.pub_vars.text.done = true;
     }
   }
 
