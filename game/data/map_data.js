@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 00:28:09, 15-Dec-2018
+ * @Last modified time: 18:06:57, 15-Dec-2018
  */
 
 var MAP_DATA = {
@@ -38,6 +38,13 @@ var MAP_DATA = {
         responses:[
           ["There are books.", "But unfortunately you can't read."],
           ["You look behind the books.", "There are more books."]
+        ]
+      },
+      0x0000FF: {
+        dir:1,
+        responses:[
+          ["On the desk you see...", [["A lamp."], ["A Chemistry Textbook."], ["A Chromebook."]]],
+          ["There is a desk.", "It reminds you of studying.", "You are filled with \"Boredom\"!"]
         ]
       }
     }
