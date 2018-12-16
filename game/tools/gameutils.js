@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 17:16:21, 15-Dec-2018
+ * @Last modified time: 17:19:31, 15-Dec-2018
  */
 
 var Game = {
@@ -46,6 +46,7 @@ function test_keypress(){
           }else{
             KEYS_DOWN[key]=false;
             switch (key){
+              case "90":
               case "13":
                 Collision.check_actions();
                 break;
@@ -56,12 +57,14 @@ function test_keypress(){
         case "text":
           KEYS_DOWN[key]=false;
           switch(key){
+            case "90":
             case "13":
               if(Effects.pub_vars.text.done){
                 ActionList.next();
                 Effects.pub_vars.text.done = "pending";
               }
               break;
+            case "16":
             case "88":
               Effects.pub_vars.text.done = true;
               break;
