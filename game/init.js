@@ -13,9 +13,9 @@
 var mc;
 if (localStorage.getItem("mainchar") === null) {
   mc = {
-    pos:[300, 155],
+    pos:[100, 100],
     dir:[0, 0],
-    map:"test_bg",
+    map:"bedroom",
     currAnim:null
   }
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
