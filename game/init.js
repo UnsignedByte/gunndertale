@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 17:03:11, 01-Dec-2018
+ * @Last modified time: 17:19:44, 15-Dec-2018
  */
 
 
@@ -48,8 +48,14 @@ var KEYS_DOWN = {
   37:false,
   38:false,
   39:false,
-  40:false
+  40:false,
+  13:false,
+  88:false,
+  90:false,
+  16:false
 };
+
+const SWITCH_DIRS = [2, 1, 3, 0];
 
 //Constants
 

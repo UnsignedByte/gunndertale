@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 22:58:15, 01-Dec-2018
+ * @Last modified time: 17:14:38, 15-Dec-2018
  */
 
 var Window = (function(){
@@ -54,26 +54,83 @@ var Window = (function(){
 var Effects = (function(){
   var self = {};
 
+  self.pub_vars = {
+    text:{
+      done:false
+    }
+  }
+
   var Vars = {
-    darken_opacity:0,
-    darken_rate:0.05
+    darken:{
+      opacity:0,
+      rate:0.05
+    },
+    text:{
+      pos:0,
+      num_frames:2,
+      font_size:8*Window.zoom,
+      box:{
+        height:36*Window.zoom,
+        width:144*Window.zoom,
+        bottom_margin:12*Window.zoom,
+        border_thicc:1.5*Window.zoom
+      }
+    }
   };
 
   self.darken = function(){
-    Vars.darken_opacity+=Vars.darken_rate;
-    if (Vars.darken_opacity>1.25){
-      Vars.darken_rate*=-1;
+    Vars.darken.opacity+=Vars.darken.rate;
+    if (Vars.darken.opacity>1.25){
+      Vars.darken.rate*=-1;
       mc.map = Game.cmde[0];
       mc.pos = [Game.cmde[1], Game.cmde[2]];
       Game.cmde = null;
-    }else if (Vars.darken_opacity<0){
-      Vars.darken_opacity = 0;
-      Vars.darken_rate*=-1;
+    }else if (Vars.darken.opacity<0){
+      Vars.darken.opacity = 0;
+      Vars.darken.rate*=-1;
       Game.curr_action_type="game";
     }
-    context.fillStyle="rgba(0, 0, 0, "+Vars.darken_opacity+")"
+    context.fillStyle="rgba(0, 0, 0, "+Vars.darken.opacity+")"
     context.fillRect(0, 0, canv.width, canv.height);
     // context.stroke();
+  }
+
+  function draw_text_box(){
+    context.fillStyle = "black";
+    context.fillRect((Window.width*Window.zoom-Vars.text.box.width)/2,
+      Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height,
+      Vars.text.box.width,
+      Vars.text.box.height);
+    context.beginPath();
+    context.lineWidth = Vars.text.box.border_thicc.toString();
+    context.strokeStyle = "white";
+    context.rect((canv.width-Vars.text.box.width)/2,
+      Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height,
+      Vars.text.box.width,
+      Vars.text.box.height);
+    context.stroke();
+  }
+
+  self.text = function(){
+    draw_text_box();
+    context.fillStyle = "white";
+    context.font = Vars.text.font_size.toString()+"px VT323";
+
+    let gp = ActionList.get_pos();
+    Vars.text.pos++;
+    switch(self.pub_vars.text.done){
+      case "pending":
+        self.pub_vars.text.done = false;
+        Vars.text.pos=0;
+        break;
+      case true:
+        Vars.text.pos = gp.length*Vars.text.num_frames
+    }
+    let last = Math.ceil(Vars.text.pos/Vars.text.num_frames)+1;
+    context.fillText(gp.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
+    if(last > gp.length){
+      self.pub_vars.text.done = true;
+    }
   }
 
   return self;
