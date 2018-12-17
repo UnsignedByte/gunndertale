@@ -13,7 +13,7 @@
 var mc;
 if (localStorage.getItem("mainchar") === null) {
   mc = {
-    pos:[127, 157],
+    pos:[100, 100],
     dir:[0, 0],
     map:"bedroom",
     currAnim:null

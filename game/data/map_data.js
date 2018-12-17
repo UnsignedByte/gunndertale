@@ -7,23 +7,14 @@
  */
 
 var MAP_DATA = {
-  "test_bg":{
+  "hallway":{
     doors:{
-      0xFF0000:["bedroom", 127, 157],
-      0x0000FF:["test_bg_2", 740, 120],
-      0x00FF00:["test_bg_2", 10, 120],
-      0xFFFF00:["test_bg", 320, 290]
-    }
-  },
-  "test_bg_2":{
-    doors:{
-      0xFF0000:["test_bg", 450, 150],
-      0x0000FF:["test_bg", 320, 290]
+      0xFF0000:["bedroom", 127, 155]
     }
   },
   "bedroom": {
     doors: {
-      0xFFFF00: ["test_bg", 11, 150]
+      0xffff00: ["hallway", 327, 88] //y would be 59 in a perfect world :(
     },
     actions: {
       0xFF0000: {
