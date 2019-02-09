@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 17:19:31, 15-Dec-2018
+ * @Last modified time: 13:37:18, 09-Feb-2019
  */
 
 var Game = {
@@ -13,7 +13,9 @@ var Game = {
   cmde:null,
   text:{
     pos:null,
-    full:null
+    full:null,
+    options:null,
+    chosen:null
   }
 }
 
@@ -106,14 +108,33 @@ var ActionList = (function(){
     let lastm = self.get_pos();
 
     Game.text.pos.push(lastpos+1);
+    Game.text.options = null;
     if (lastm.length === lastpos+1){
       Game.curr_action_type="game";
       return null;
     }
     if(typeof lastm[lastpos+1]=== 'string'){
     }else if (Array.isArray(lastm[lastpos+1])){
-      Game.text.pos.push(randInt(0,lastm[lastpos+1].length));
+      Game.text.pos.push(randInt(0,lastm[lastpos+1].length)); // Is array
       Game.text.pos.push(0);
+    }else if (lastm[lastpos+1].constructor == Object){ //Is dictionary
+      Game.text.options = lastm[lastpos+1];
+      Game.text.chosen = 0;
+    }
+  }
+
+  return self;
+}());
+
+
+var Events = (function(){
+  var self = {};
+
+  self.text = function(){
+    if (Game.text.options != null){
+      Effects.options();
+    }else{
+      Effects.text(ActionList.get_pos());
     }
   }
 

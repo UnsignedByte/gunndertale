@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 18:06:57, 15-Dec-2018
+ * @Last modified time: 15:24:29, 09-Feb-2019
  */
 
 var MAP_DATA = {
@@ -43,8 +43,15 @@ var MAP_DATA = {
       0x0000FF: {
         dir:1,
         responses:[
-          ["On the desk you see...", [["A lamp."], ["A Chemistry Textbook."], ["A Chromebook."]]],
-          ["There is a desk.", "It reminds you of studying.", "You are filled with \"Boredom\"!"]
+          //["On the desk you see...", [
+          //  ["A lamp."], ["A Chemistry Textbook."], ["A Chromebook."]]],
+          //["There is a desk.", "It reminds you of studying.", "You are filled with \"Boredom\"!"],
+          ["You can study.", "Will you study?", {
+            "yes":["You studied.", "Your intelligence didn't increase."],
+            "no":["You didn't study."],
+            "maybe":["You thought about studying."],
+            "????":["You couldn't come to a decision."],
+          }]
         ]
       }
     }

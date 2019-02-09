@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 17:14:38, 15-Dec-2018
+ * @Last modified time: 15:23:47, 09-Feb-2019
  */
 
 var Window = (function(){
@@ -68,7 +68,7 @@ var Effects = (function(){
     text:{
       pos:0,
       num_frames:2,
-      font_size:8*Window.zoom,
+      font_size:Math.round(8*Window.zoom),
       box:{
         height:36*Window.zoom,
         width:144*Window.zoom,
@@ -104,19 +104,18 @@ var Effects = (function(){
     context.beginPath();
     context.lineWidth = Vars.text.box.border_thicc.toString();
     context.strokeStyle = "white";
-    context.rect((canv.width-Vars.text.box.width)/2,
+    context.rect((Window.width*Window.zoom-Vars.text.box.width)/2,
       Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height,
       Vars.text.box.width,
       Vars.text.box.height);
     context.stroke();
   }
 
-  self.text = function(){
+  self.text = function(text){
     draw_text_box();
     context.fillStyle = "white";
     context.font = Vars.text.font_size.toString()+"px VT323";
 
-    let gp = ActionList.get_pos();
     Vars.text.pos++;
     switch(self.pub_vars.text.done){
       case "pending":
@@ -124,13 +123,38 @@ var Effects = (function(){
         Vars.text.pos=0;
         break;
       case true:
-        Vars.text.pos = gp.length*Vars.text.num_frames
+        Vars.text.pos = text.length*Vars.text.num_frames
     }
     let last = Math.ceil(Vars.text.pos/Vars.text.num_frames)+1;
-    context.fillText(gp.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
-    if(last > gp.length){
+    context.fillText(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
+    if(last > text.length){
       self.pub_vars.text.done = true;
     }
+  }
+
+  self.options = function(){
+    self.pub_vars.text.done = true;
+    let lastpos = Game.text.pos.pop()
+    let gp = ActionList.get_pos()[lastpos-1];
+    self.text(gp);
+    Game.text.pos.push(lastpos);
+    let a = 0;
+
+    let positions = [
+      [(Window.width*Window.zoom-Vars.text.box.width/2)/2,Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height/3],
+      [(Window.width*Window.zoom+Vars.text.box.width/2)/2,Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height/3],
+      [Window.width*Window.zoom/2,Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height*7/12],
+      [Window.width*Window.zoom/2,Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height/12]
+    ];
+
+    Object.keys(Game.text.options).forEach(key => {
+      // context.fillText(key, positions[a][0]-key.length*Vars.text.font_size/2*(18/35), positions[a][1]);
+      let theight = Vars.text.font_size*(68/91);
+      let twidth = context.measureText(key).width;
+      console.log(key, twidth, theight);
+      context.fillText(key, positions[a][0]-twidth/2,positions[a][1]);
+      a++;
+    });
   }
 
   return self;
