@@ -3,14 +3,15 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 15:24:29, 09-Feb-2019
+ * @Last modified time: 16:01:21, 09-Feb-2019
  */
 
 var MAP_DATA = {
   "hallway":{
     doors:{
       0xFF0000:["bedroom", 127, 155]
-    }
+    },
+    actions:{}
   },
   "bedroom": {
     doors: {
@@ -34,9 +35,9 @@ var MAP_DATA = {
       0x0000FF: {
         dir:1,
         responses:[
-          //["On the desk you see...", [
+          // ["On the desk you see...", [
           //  ["A lamp."], ["A Chemistry Textbook."], ["A Chromebook."]]],
-          //["There is a desk.", "It reminds you of studying.", "You are filled with \"Boredom\"!"],
+          // ["There is a desk.", "It reminds you of studying.", "You are filled with \"Boredom\"!"],
           ["You can study.", "Will you study?", {
             "yes":["You studied.", "Your intelligence didn't increase."],
             "no":["You didn't study."],

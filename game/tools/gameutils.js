@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 13:37:18, 09-Feb-2019
+ * @Last modified time: 16:18:22, 09-Feb-2019
  */
 
 var Game = {
@@ -15,7 +15,8 @@ var Game = {
     pos:null,
     full:null,
     options:null,
-    chosen:null
+    chosen:null,
+    chosenKey:null
   }
 }
 
@@ -62,6 +63,10 @@ function test_keypress(){
             case "90":
             case "13":
               if(Effects.pub_vars.text.done){
+                if(Game.text.options != null){
+                  Game.text.pos.push(Game.text.chosenKey);
+                  Game.text.pos.push(-1);
+                }
                 ActionList.next();
                 Effects.pub_vars.text.done = "pending";
               }
@@ -69,6 +74,18 @@ function test_keypress(){
             case "16":
             case "88":
               Effects.pub_vars.text.done = true;
+              break;
+            case "37":
+              Game.text.chosen=0;
+              break;
+            case "38":
+              Game.text.chosen=2;
+              break;
+            case "39":
+              Game.text.chosen=1;
+              break;
+            case "40":
+              Game.text.chosen=3;
               break;
             default:
           }

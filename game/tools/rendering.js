@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 15:23:47, 09-Feb-2019
+ * @Last modified time: 16:09:19, 09-Feb-2019
  */
 
 var Window = (function(){
@@ -148,11 +148,15 @@ var Effects = (function(){
     ];
 
     Object.keys(Game.text.options).forEach(key => {
-      // context.fillText(key, positions[a][0]-key.length*Vars.text.font_size/2*(18/35), positions[a][1]);
       let theight = Vars.text.font_size*(68/91);
       let twidth = context.measureText(key).width;
       console.log(key, twidth, theight);
       context.fillText(key, positions[a][0]-twidth/2,positions[a][1]);
+      if (Game.text.chosen === a){
+        Game.text.chosenKey=key;
+        context.drawImage(MC_DATA.cursor, positions[a][0]-twidth/2-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4, positions[a][1]-MC_DATA.cursor.height*Window.zoom, MC_DATA.cursor.width*Window.zoom,MC_DATA.cursor.height*Window.zoom);
+      }
+
       a++;
     });
   }
