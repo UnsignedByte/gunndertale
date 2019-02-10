@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 16:09:19, 09-Feb-2019
+ * @Last modified time: 16:21:33, 09-Feb-2019
  */
 
 var Window = (function(){
@@ -150,7 +150,6 @@ var Effects = (function(){
     Object.keys(Game.text.options).forEach(key => {
       let theight = Vars.text.font_size*(68/91);
       let twidth = context.measureText(key).width;
-      console.log(key, twidth, theight);
       context.fillText(key, positions[a][0]-twidth/2,positions[a][1]);
       if (Game.text.chosen === a){
         Game.text.chosenKey=key;
