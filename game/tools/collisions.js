@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 00:28:36, 15-Dec-2018
+ * @Last modified time: 16:05:21, 09-Feb-2019
  */
 
 var Collision = (function(){
@@ -76,8 +76,7 @@ var Collision = (function(){
   self.check_doors = function(){
     let currmapdoors = MAP_DATA[mc.map].doors
     Object.keys(currmapdoors).forEach(key => {
-      let rect_check = check_rect_player(0, Number(key));
-      if (rect_check[0] || rect_check[1] || rect_check[2] || rect_check[3]){
+      if (check_in_dir(MOV_SPEED, Number(key))){
         Game.curr_action_type = "darken";
         Game.cmde = currmapdoors[key];
       }
