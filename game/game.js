@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 13:53:37, 11-Dec-2018
+ * @Last modified time: 13:22:41, 09-Feb-2019
  */
 
 //no more blurring! :)
@@ -26,7 +26,7 @@ function draw(){
       break;
     case "text":
       Window.render();
-      Effects.text();
+      Events.text();
       break;
     default:
   }

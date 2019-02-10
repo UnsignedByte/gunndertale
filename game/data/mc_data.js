@@ -3,7 +3,7 @@
  * @Date:   18:22:30, 25-Nov-2018
  * @Filename: mc_data.js
  * @Last modified by:   edl
- * @Last modified time: 22:42:04, 27-Nov-2018
+ * @Last modified time: 15:47:13, 09-Feb-2019
  */
 
 
@@ -13,7 +13,8 @@ var MC_DATA = {
    ["0.png", "1.png", "0.png", "2.png"],
    ["0.png", "1.png", "0.png", "1.png"],
    ["0.png", "1.png", "0.png", "1.png"]
- ]
+ ],
+ cursor:null
 };
 
 init_mc_data();
@@ -25,8 +26,15 @@ function init_mc_data(){
       let img = new Image();
       img.src = "../images/objects/mc/"+directions[i]+"/"+MC_DATA.animations[i][j];
       img.onload = function() {
-        MC_DATA.animations[i][j] = img
+        MC_DATA.animations[i][j] = img;
       }
     }
+  }
+
+  //load cursor
+  let img = new Image();
+  img.src = "../images/objects/mc/cursor.png";
+  img.onload = function(){
+    MC_DATA.cursor = img;
   }
 }
