@@ -3,15 +3,17 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 17:19:44, 15-Dec-2018
+ * @Last modified time: 22:55:15, 10-Feb-2019
  */
 
 
 
 
 //Init
+
 var mc;
-if (localStorage.getItem("mainchar") === null) {
+
+function start_newgame(){
   mc = {
     pos:[100, 100],
     dir:[0, 0],
@@ -19,6 +21,10 @@ if (localStorage.getItem("mainchar") === null) {
     currAnim:null
   }
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
+}
+
+if (localStorage.getItem("mainchar") === null) {
+  start_newgame();
 }else{
   mc = JSON.parse(window.localStorage.getItem("mainchar"));
 }
@@ -52,7 +58,9 @@ var KEYS_DOWN = {
   13:false,
   88:false,
   90:false,
-  16:false
+  16:false,
+  67:false,
+  17:false
 };
 
 const SWITCH_DIRS = [2, 1, 3, 0];
