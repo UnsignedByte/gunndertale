@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 16:18:22, 09-Feb-2019
+ * @Last modified time: 22:27:28, 10-Feb-2019
  */
 
 var Game = {
@@ -17,9 +17,9 @@ var Game = {
     options:null,
     chosen:null,
     chosenKey:null
-  }
+  },
+  inventory:[null,null,null,null,null,null,null,null,null,null]
 }
-
 
 function test_keypress(){
   let is_moving = false;
@@ -52,6 +52,10 @@ function test_keypress(){
               case "90":
               case "13":
                 Collision.check_actions();
+                break;
+              case "17":
+              case "67":
+                Game.curr_action_type="inventory";
                 break;
               default:
             }
@@ -89,6 +93,8 @@ function test_keypress(){
               break;
             default:
           }
+          break;
+        case "inventory":
           break;
         default:
       }
@@ -153,6 +159,10 @@ var Events = (function(){
     }else{
       Effects.text(ActionList.get_pos());
     }
+  }
+
+  self.give_item = function(action){
+
   }
 
   return self;

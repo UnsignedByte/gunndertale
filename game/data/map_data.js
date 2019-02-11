@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 16:21:45, 09-Feb-2019
+ * @Last modified time: 23:14:27, 10-Feb-2019
  */
 
 var MAP_DATA = {
@@ -15,14 +15,18 @@ var MAP_DATA = {
   },
   "bedroom": {
     doors: {
-      0xffff00: ["hallway", 327, 88] //y would be 59 in a perfect world :(
+      0xffff00: ["hallway", 327, 59]
     },
     actions: {
       0xFF0000: {
         dir:2,
         responses:[
           ["You don't need to sleep yet."],
-          ["You look closely.", "It's still a bed."]
+          ["You look closely.", "It's still a bed."],
+          ["You feel tired.", "Go to sleep?", {
+            yes:["You try to sleep,","but you realize you have homework to do."],
+            no:["You decide to sleep later."]
+          }]
         ]
       },
       0x00FF00: {
