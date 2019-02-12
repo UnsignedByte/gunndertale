@@ -3,7 +3,7 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 23:14:27, 10-Feb-2019
+ * @Last modified time: 16:13:23, 11-Feb-2019
  */
 
 var MAP_DATA = {
@@ -11,7 +11,14 @@ var MAP_DATA = {
     doors:{
       0xFF0000:["bedroom", 127, 155]
     },
-    actions:{}
+    actions:{
+      0xFFFF00:{
+        dir:1,
+        responses:[
+          ["The door is locked."]
+        ]
+      }
+    }
   },
   "bedroom": {
     doors: {
