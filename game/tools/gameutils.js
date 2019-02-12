@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 22:27:28, 10-Feb-2019
+ * @Last modified time: 17:06:43, 11-Feb-2019
  */
 
 var Game = {
@@ -17,8 +17,7 @@ var Game = {
     options:null,
     chosen:null,
     chosenKey:null
-  },
-  inventory:[null,null,null,null,null,null,null,null,null,null]
+  }
 }
 
 function test_keypress(){

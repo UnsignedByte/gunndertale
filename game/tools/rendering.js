@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 23:08:50, 10-Feb-2019
+ * @Last modified time: 18:23:14, 11-Feb-2019
  */
 
 var Window = (function(){
@@ -169,6 +169,7 @@ var Effects = (function(){
   }
 
   self.inventory = function(){
+
     context.beginPath();
     context.lineWidth = Vars.inventory.box.border_thicc.toString();
     context.strokeStyle = "white";
@@ -176,6 +177,14 @@ var Effects = (function(){
     context.stroke();
     context.fillStyle = "black";
     context.fillRect((Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift, Vars.inventory.box.margin, Vars.inventory.box.width, Window.height*Window.zoom-2*Vars.inventory.box.margin);
+
+    context.fillStyle = "white";
+    context.font = Vars.text.font_size.toString()+"px VT323";
+    for(let i = 0; i < INVENTORY_SIZE; i++){
+      if(mc.inventory[i] != null){
+        context.fillText(mc.inventory[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.text.font_size/2, Vars.inventory.box.margin+Vars.text.font_size*1.5*(68/91)*(i+1));
+      }
+    }
   }
 
   return self;
