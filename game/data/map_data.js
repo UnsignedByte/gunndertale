@@ -3,13 +3,20 @@
  * @Date:   22:03:49, 24-Nov-2018
  * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 16:13:23, 11-Feb-2019
+ * @Last modified time: 17:01:25, 11-Feb-2019
  */
 
 var MAP_DATA = {
+  "livingroom":{
+    doors:{
+      0x00FFCC:["hallway", 10, 112-29/2]
+    },
+    actions:{}
+  },
   "hallway":{
     doors:{
-      0xFF0000:["bedroom", 127, 155]
+      0xFF0000:["bedroom", 127, 155],
+      0x00FF00:["livingroom", 310, 224-29/2]
     },
     actions:{
       0xFFFF00:{
