@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 18:23:14, 11-Feb-2019
+ * @Last modified time: 18:36:15, 11-Feb-2019
  */
 
 var Window = (function(){
@@ -180,9 +180,14 @@ var Effects = (function(){
 
     context.fillStyle = "white";
     context.font = Vars.text.font_size.toString()+"px VT323";
-    for(let i = 0; i < INVENTORY_SIZE; i++){
+    for(let i = 0; i < mc.inventory.length; i++){
       if(mc.inventory[i] != null){
-        context.fillText(mc.inventory[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.text.font_size/2, Vars.inventory.box.margin+Vars.text.font_size*1.5*(68/91)*(i+1));
+        context.fillText(mc.inventory[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.text.font_size, Vars.inventory.box.margin+Vars.text.font_size*1.5*(68/91)*(i+1));
+      }
+      if(i === Game.inventory.chosen){
+        context.drawImage(MC_DATA.cursor, (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.text.font_size-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
+          Vars.inventory.box.margin+Vars.text.font_size*1.5*(68/91)*(i+1)-MC_DATA.cursor.height*Window.zoom,
+          MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom);
       }
     }
   }

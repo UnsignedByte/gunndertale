@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 17:07:39, 11-Feb-2019
+ * @Last modified time: 18:36:59, 11-Feb-2019
  */
 
 
@@ -22,9 +22,6 @@ function start_newgame(){
     inventory:[]
   }
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
-  for(let i = 0; i < INVENTORY_SIZE; i++){
-    mc.inventory.push(null);
-  }
 }
 
 if (localStorage.getItem("mainchar") === null) {

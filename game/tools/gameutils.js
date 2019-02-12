@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 17:06:43, 11-Feb-2019
+ * @Last modified time: 18:40:41, 11-Feb-2019
  */
 
 var Game = {
@@ -17,8 +17,11 @@ var Game = {
     options:null,
     chosen:null,
     chosenKey:null
+  },
+  inventory:{
+    chosen:null
   }
-}
+};
 
 function test_keypress(){
   let is_moving = false;
@@ -54,6 +57,7 @@ function test_keypress(){
                 break;
               case "17":
               case "67":
+                Game.inventory.chosen = 0;
                 Game.curr_action_type="inventory";
                 break;
               default:
@@ -94,6 +98,22 @@ function test_keypress(){
           }
           break;
         case "inventory":
+          KEYS_DOWN[key] = false;
+          switch(key){
+            case "40":
+              Game.inventory.chosen++;
+              Game.inventory.chosen%=mc.inventory.length;
+              break;
+            case "38":
+              Game.inventory.chosen+=mc.inventory.length-1;
+              Game.inventory.chosen%=mc.inventory.length;
+              break;
+            case "17":
+            case "67":
+              Game.curr_action_type="game";
+              break;
+            default:
+          }
           break;
         default:
       }
