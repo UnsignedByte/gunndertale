@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 16:21:33, 09-Feb-2019
+ * @Last modified time: 18:36:15, 11-Feb-2019
  */
 
 var Window = (function(){
@@ -74,6 +74,14 @@ var Effects = (function(){
         width:144*Window.zoom,
         bottom_margin:12*Window.zoom,
         border_thicc:1.5*Window.zoom
+      }
+    },
+    inventory:{
+      box:{
+        left_shift:36*Window.zoom,
+        margin:12*Window.zoom,
+        width:108*Window.zoom,
+        border_thicc:3*Window.zoom
       }
     }
   };
@@ -158,6 +166,30 @@ var Effects = (function(){
 
       a++;
     });
+  }
+
+  self.inventory = function(){
+
+    context.beginPath();
+    context.lineWidth = Vars.inventory.box.border_thicc.toString();
+    context.strokeStyle = "white";
+    context.rect((Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift, Vars.inventory.box.margin, Vars.inventory.box.width, Window.height*Window.zoom-2*Vars.inventory.box.margin);
+    context.stroke();
+    context.fillStyle = "black";
+    context.fillRect((Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift, Vars.inventory.box.margin, Vars.inventory.box.width, Window.height*Window.zoom-2*Vars.inventory.box.margin);
+
+    context.fillStyle = "white";
+    context.font = Vars.text.font_size.toString()+"px VT323";
+    for(let i = 0; i < mc.inventory.length; i++){
+      if(mc.inventory[i] != null){
+        context.fillText(mc.inventory[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.text.font_size, Vars.inventory.box.margin+Vars.text.font_size*1.5*(68/91)*(i+1));
+      }
+      if(i === Game.inventory.chosen){
+        context.drawImage(MC_DATA.cursor, (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.text.font_size-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
+          Vars.inventory.box.margin+Vars.text.font_size*1.5*(68/91)*(i+1)-MC_DATA.cursor.height*Window.zoom,
+          MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom);
+      }
+    }
   }
 
   return self;
