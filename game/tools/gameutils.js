@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 18:40:41, 11-Feb-2019
+ * @Last modified time: 07:21:09, 14-Feb-2019
  */
 
 var Game = {
@@ -157,8 +157,13 @@ var ActionList = (function(){
     }
     if(typeof lastm[lastpos+1]=== 'string'){
     }else if (Array.isArray(lastm[lastpos+1])){
-      Game.text.pos.push(randInt(0,lastm[lastpos+1].length)); // Is array
-      Game.text.pos.push(0);
+      if(typeof lastm[lastpos+1][0] === "function"){ // is action
+        lastm[lastpos+1][0](lastm[lastpos+1][1]);
+        self.next();
+      }else{
+        Game.text.pos.push(randInt(0,lastm[lastpos+1].length)); // Is array
+        Game.text.pos.push(0);
+      }
     }else if (lastm[lastpos+1].constructor == Object){ //Is dictionary
       Game.text.options = lastm[lastpos+1];
       Game.text.chosen = 0;
@@ -181,7 +186,8 @@ var Events = (function(){
   }
 
   self.give_item = function(action){
-
+    mc.inventory.push(action);
+    mc.inventory = mc.inventory.slice(0, MAX_INVENTORY_SIZE);
   }
 
   return self;
