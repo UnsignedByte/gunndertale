@@ -1,3 +1,3 @@
-# gunn-student-sim-v2
+# GUNNDERTALE
 
-Original at [sheeptester's website](https://sheeptester.github.io/gunn-student-sim/)
+Inspired by [gunn student sim](https://sheeptester.github.io/gunn-student-sim/) by sheeptester
