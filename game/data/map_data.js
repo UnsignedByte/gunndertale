@@ -1,10 +1,10 @@
 /**
- * @Author: Edmund Lam <edl>
- * @Date:   22:03:49, 24-Nov-2018
- * @Filename: map_data.js
+* @Author: Edmund Lam <edl>
+* @Date:   22:03:49, 24-Nov-2018
+* @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 00:00:01, 14-Feb-2019
- */
+ * @Last modified time: 16:27:01, 14-Feb-2019
+*/
 
 var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate mine later to match yours but for now i think ill be the only one editing this so.
     "secret": {//this is a test room that i will delete later 
