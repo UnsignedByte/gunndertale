@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 18:36:15, 11-Feb-2019
+ * @Last modified time: 17:05:24, 17-Feb-2019
  */
 
 var Window = (function(){
@@ -103,6 +103,25 @@ var Effects = (function(){
     // context.stroke();
   }
 
+  function fill_text(str, x,  y, width=null, size=Vars.text.font_size){
+    console.log(width, size);
+    context.font = size.toString()+"px VT323";
+    if (width === null){
+      context.fillText(str, x, y);
+    }else{
+      let lasti = 0;
+      let num_lines = 0;
+      for(let i = 1; i < str.length+1; i++){
+        if(context.measureText(str.substring(lasti, i)).width > width){
+          context.fillText(str.substring(lasti, i-1), x, y+size*1.25*(68/91)*num_lines);
+          lasti = i-1;
+          num_lines++;
+        }
+      }
+      context.fillText(str.substring(lasti, str.length), x, y+size*1.25*(68/91)*num_lines);
+    }
+  }
+
   function draw_text_box(){
     context.fillStyle = "black";
     context.fillRect((Window.width*Window.zoom-Vars.text.box.width)/2,
@@ -134,7 +153,8 @@ var Effects = (function(){
         Vars.text.pos = text.length*Vars.text.num_frames
     }
     let last = Math.ceil(Vars.text.pos/Vars.text.num_frames)+1;
-    context.fillText(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
+    fill_text(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size, Vars.text.box.width);
+    // context.fillText(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
     if(last > text.length){
       self.pub_vars.text.done = true;
     }
@@ -190,6 +210,12 @@ var Effects = (function(){
           MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom);
       }
     }
+    let action_list = ["USE", "INFO", "DROP"];
+    context.textAlign="center";
+    for(let i = 0; i < 3; i++){
+      context.fillText(action_list[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.inventory.box.width*(2*i+1)/6, Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2);
+    }
+    context.textAlign="left";
   }
 
   return self;
