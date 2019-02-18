@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 16:27:01, 14-Feb-2019
+ * @Last modified time: 23:03:33, 16-Feb-2019
 */
 
 var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate mine later to match yours but for now i think ill be the only one editing this so.
@@ -13,7 +13,7 @@ var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate
     },
     actions: {
       0x00FFFF: {
-        dir: 1,
+        dir: [1],
         responses: [
           ["You see a frying pan left on the table.", "Pick it up?", {
             yes: [
@@ -33,7 +33,7 @@ var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate
     },
     actions: {
       0xFFFF00: {
-        dir: 1,
+        dir: [1],
         responses: [
           ["The door is locked."]
         ]
@@ -46,7 +46,7 @@ var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate
     },
     actions: {
       0xFF0000: {
-        dir: 2,
+        dir: [2],
         responses: [
           ["You don't need to sleep yet."],
           ["You look closely.", "It's still a bed."],
@@ -57,14 +57,14 @@ var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate
         ]
       },
       0x00FF00: {
-        dir: 1,
+        dir: [1, 2],
         responses: [
           ["There are books.", "But unfortunately you can't read."],
           ["You look behind the books.", "There are more books."]
         ]
       },
       0x0000FF: {
-        dir: 1,
+        dir: [1],
         responses: [
           ["On the desk you see...", [
             ["A lamp."], ["A Chemistry Textbook."], ["A Chromebook."]
