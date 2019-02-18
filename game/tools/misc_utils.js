@@ -3,7 +3,7 @@
  * @Date:   22:39:11, 24-Nov-2018
  * @Filename: misc_utils.js
  * @Last modified by:   edl
- * @Last modified time: 23:17:25, 17-Feb-2019
+ * @Last modified time: 23:36:08, 17-Feb-2019
  */
 
 function array_sum(arr1, arr2){
@@ -38,4 +38,10 @@ function secs2time(s){
     h:Math.floor(s/(3600)),
     m:Math.floor(s/60)%60,
     s:s%60};
+}
+
+Number.prototype.pad = function(size) {
+    var s = String(this);
+    while (s.length < (size || 2)) {s = "0" + s;}
+    return s;
 }
