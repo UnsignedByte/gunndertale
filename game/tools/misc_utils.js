@@ -3,7 +3,7 @@
  * @Date:   22:39:11, 24-Nov-2018
  * @Filename: misc_utils.js
  * @Last modified by:   edl
- * @Last modified time: 23:36:08, 17-Feb-2019
+ * @Last modified time: 08:15:05, 18-Feb-2019
  */
 
 function array_sum(arr1, arr2){
@@ -35,13 +35,7 @@ function randInt(a, b){
 function secs2time(s){
   s%=86400;
   return {
-    h:Math.floor(s/(3600)),
-    m:Math.floor(s/60)%60,
-    s:s%60};
-}
-
-Number.prototype.pad = function(size) {
-    var s = String(this);
-    while (s.length < (size || 2)) {s = "0" + s;}
-    return s;
+    h:Math.floor(s/(3600)).toString().padStart(2, '0'),
+    m:(Math.floor(s/60)%60).toString().padStart(2, '0'),
+    s:(s%60).toString().padStart(2, '0')};
 }
