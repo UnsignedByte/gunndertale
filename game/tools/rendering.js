@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 23:36:29, 17-Feb-2019
+ * @Last modified time: 23:40:38, 17-Feb-2019
  */
 
 var Window = (function(){
@@ -231,6 +231,7 @@ var Effects = (function(){
     let t = secs2time(mc.time);
     context.fillStyle="white";
     context.fillText(`${t.h.pad(2)}:${t.m.pad(2)}:${t.s.pad(2)}`, Window.width*Window.zoom-Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
+    context.textAlign = "left";
   }
 
   return self;
