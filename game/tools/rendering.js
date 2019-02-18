@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 17:05:24, 17-Feb-2019
+ * @Last modified time: 18:32:59, 17-Feb-2019
  */
 
 var Window = (function(){
@@ -104,21 +104,21 @@ var Effects = (function(){
   }
 
   function fill_text(str, x,  y, width=null, size=Vars.text.font_size){
-    console.log(width, size);
     context.font = size.toString()+"px VT323";
     if (width === null){
       context.fillText(str, x, y);
     }else{
+      let splstr = str.split(" ");
       let lasti = 0;
       let num_lines = 0;
-      for(let i = 1; i < str.length+1; i++){
-        if(context.measureText(str.substring(lasti, i)).width > width){
-          context.fillText(str.substring(lasti, i-1), x, y+size*1.25*(68/91)*num_lines);
+      for(let i = 1; i < splstr.length+1; i++){
+        if(context.measureText(splstr.slice(lasti, i).join(' ')).width > width){
+          context.fillText(splstr.slice(lasti, i-1).join(' '), x, y+size*1.25*(68/91)*num_lines);
           lasti = i-1;
           num_lines++;
         }
       }
-      context.fillText(str.substring(lasti, str.length), x, y+size*1.25*(68/91)*num_lines);
+      context.fillText(splstr.slice(lasti, splstr.length).join(' '), x, y+size*1.25*(68/91)*num_lines);
     }
   }
 
@@ -153,7 +153,7 @@ var Effects = (function(){
         Vars.text.pos = text.length*Vars.text.num_frames
     }
     let last = Math.ceil(Vars.text.pos/Vars.text.num_frames)+1;
-    fill_text(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size, Vars.text.box.width);
+    fill_text(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size, Vars.text.box.width-Vars.text.font_size);
     // context.fillText(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
     if(last > text.length){
       self.pub_vars.text.done = true;
