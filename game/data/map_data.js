@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 16:10:20, 17-Feb-2019
+ * @Last modified time: 16:16:03, 17-Feb-2019
 */
 
 var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate mine later to match yours but for now i think ill be the only one editing this so.
@@ -54,7 +54,7 @@ var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate
                 ]
             },
             0xff00ff: {
-                dir: [0],
+                dir: [0, 1, 2, 3],
                 responses: [["The table reminds you of eating."]]
             },
             0xffcc00: {
