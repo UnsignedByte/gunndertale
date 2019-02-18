@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 18:32:59, 17-Feb-2019
+ * @Last modified time: 22:59:37, 17-Feb-2019
  */
 
 var Window = (function(){
@@ -211,9 +211,15 @@ var Effects = (function(){
       }
     }
     let action_list = ["USE", "INFO", "DROP"];
-    context.textAlign="center";
+    context.textAlign="left";
     for(let i = 0; i < 3; i++){
-      context.fillText(action_list[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.inventory.box.width*(2*i+1)/6, Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2);
+      let twidth = context.measureText(action_list[i]).width;
+      if (i === Game.inventory.chosen_action){
+        context.drawImage(MC_DATA.cursor, (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.inventory.box.width*(2*i+1)/6-twidth/2-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
+          Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2-MC_DATA.cursor.height*Window.zoom,
+          MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom)
+      }
+      context.fillText(action_list[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.inventory.box.width*(2*i+1)/6-twidth/2, Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2);
     }
     context.textAlign="left";
   }

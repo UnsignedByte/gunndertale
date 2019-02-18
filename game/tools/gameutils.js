@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 10:14:47, 14-Feb-2019
+ * @Last modified time: 23:03:07, 17-Feb-2019
  */
 
 var Game = {
@@ -19,7 +19,8 @@ var Game = {
     chosenKey:null
   },
   inventory:{
-    chosen:null
+    chosen:null,
+    chosen_action:null
   }
 };
 
@@ -100,17 +101,52 @@ function test_keypress(){
         case "inventory":
           KEYS_DOWN[key] = false;
           switch(key){
-            case "40":
-              Game.inventory.chosen++;
-              Game.inventory.chosen%=mc.inventory.length;
+            case "37":
+              if(Game.inventory.chosen_action != null){
+                Game.inventory.chosen_action+=2;
+                Game.inventory.chosen_action%=3;
+              }
               break;
             case "38":
-              Game.inventory.chosen+=mc.inventory.length-1;
-              Game.inventory.chosen%=mc.inventory.length;
+              if(Game.inventory.chosen_action === null){
+                Game.inventory.chosen+=mc.inventory.length-1;
+                Game.inventory.chosen%=mc.inventory.length;
+              }
               break;
+            case "39":
+              if(Game.inventory.chosen_action != null){
+                Game.inventory.chosen_action+=1;
+                Game.inventory.chosen_action%=3;
+              }
+              break;
+            case "40":
+              if(Game.inventory.chosen_action === null){
+                Game.inventory.chosen++;
+                Game.inventory.chosen%=mc.inventory.length;
+              }
+              break;
+
             case "17":
             case "67":
               Game.curr_action_type="game";
+              break;
+            case "90":
+            case "13":
+              if(Game.inventory.chosen_action === null){
+                Game.inventory.chosen_action = 0;
+              }else{
+                switch(Game.inventory.chosen_action){
+                  case 0:
+                    break;
+                  case 1:
+                    break;
+                  case 2:
+                    mc.inventory.splice(Game.inventory.chosen, 1);
+                    break;
+                }
+                Game.inventory.chosen = 0;
+                Game.inventory.chosen_action = null;
+              }
               break;
             default:
           }
