@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 22:59:37, 17-Feb-2019
+ * @Last modified time: 23:31:37, 17-Feb-2019
  */
 
 var Window = (function(){
@@ -40,6 +40,7 @@ var Window = (function(){
     drawImage(MAP_DATA[mc.map].back, [0, 0]);
     drawImage(mc.currAnim, mc.pos);
     drawImage(MAP_DATA[mc.map].front, [0, 0]);
+    Effects.displaytime();
   }
 
   self.get_map = function(){
@@ -222,6 +223,14 @@ var Effects = (function(){
       context.fillText(action_list[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.inventory.box.width*(2*i+1)/6-twidth/2, Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2);
     }
     context.textAlign="left";
+  }
+
+  self.displaytime = function(){
+    context.textAlign = "right";
+    context.font = Vars.text.font_size.toString()+"px VT323";
+    let t = secs2time(mc.time);
+    context.fillStyle="white";
+    context.fillText(`${t.h}:${t.m}:${t.s}`, Window.width*Window.zoom-Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
   }
 
   return self;

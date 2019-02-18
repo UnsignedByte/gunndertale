@@ -3,7 +3,7 @@
  * @Date:   22:39:11, 24-Nov-2018
  * @Filename: misc_utils.js
  * @Last modified by:   edl
- * @Last modified time: 00:05:00, 15-Dec-2018
+ * @Last modified time: 23:17:25, 17-Feb-2019
  */
 
 function array_sum(arr1, arr2){
@@ -30,4 +30,12 @@ function randChoice(l){
 
 function randInt(a, b){
   return a+Math.floor(Math.random()*b);
+}
+
+function secs2time(s){
+  s%=86400;
+  return {
+    h:Math.floor(s/(3600)),
+    m:Math.floor(s/60)%60,
+    s:s%60};
 }

@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 09:23:06, 14-Feb-2019
+ * @Last modified time: 23:07:31, 17-Feb-2019
  */
 
 
@@ -14,14 +14,7 @@
 var mc;
 
 function start_newgame(){
-  mc = {
-    pos:[100, 100],
-    dir:[0, 0],
-    map:"bedroom",
-    currAnim:null,
-    inventory:[],
-    time:0
-  }
+  mc = DEFAULT_MC;
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
 }
 
