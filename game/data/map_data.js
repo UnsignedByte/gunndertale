@@ -3,11 +3,33 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 23:44:45, 17-Feb-2019
+ * @Last modified time: 14:43:01, 21-Feb-2019
 */
 
-var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate mine later to match yours but for now i think ill be the only one editing this so.
-  "secret": {//this is a test room that i will delete later
+var DEFAULT_LOCAL_MAP_DATA = {
+  "secret":{
+    items:{}
+  },
+  "house":{
+    items:{}
+  },
+  "livingroom":{
+    items:{
+      0x00ffff:{
+        "Frying Pan":1
+      }
+    }
+  },
+  "hallway":{
+    items:{}
+  },
+  "bedroom":{
+    items:{}
+  }
+}
+
+var MAP_DATA = {
+  "secret": {
     doors: {
       0xffff00: ["house", 119, 455]
     },
@@ -38,7 +60,7 @@ var MAP_DATA = {//lol my tab space is different from yours.... i might calibrate
           ["You see a frying pan left on the counter.", "Pick it up?", {
             yes: [
               [Events.give_item, "Frying Pan"],
-              "You recieved \"Frying Pan\"!"
+              [["You recieved \"Frying Pan\"!"], ["There were no more frying pans to recieve."]]
             ],
             no: ["You left the pan where it was."]
           }]

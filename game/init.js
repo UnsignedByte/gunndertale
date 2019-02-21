@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 23:07:31, 17-Feb-2019
+ * @Last modified time: 22:48:31, 20-Feb-2019
  */
 
 
@@ -12,16 +12,20 @@
 //Init
 
 var mc;
+var lmd;
 
 function start_newgame(){
   mc = DEFAULT_MC;
+  lmd = DEFAULT_LOCAL_MAP_DATA;
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
+  window.localStorage.setItem("lmd", JSON.stringify(lmd));
 }
 
-if (localStorage.getItem("mainchar") === null) {
+if (localStorage.getItem("mainchar") === null || localStorage.getItem("lmd") === null) {
   start_newgame();
 }else{
   mc = JSON.parse(window.localStorage.getItem("mainchar"));
+  lmd = JSON.parse(window.localStorage.getItem("lmd"));
 }
 
 var canv = document.getElementById('game');

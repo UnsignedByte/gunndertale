@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 23:03:07, 17-Feb-2019
+ * @Last modified time: 14:44:37, 21-Feb-2019
  */
 
 var Game = {
@@ -12,6 +12,7 @@ var Game = {
   curr_action_type:"game",
   cmde:null,
   text:{
+    door_id:null,
     pos:null,
     full:null,
     options:null,
@@ -194,8 +195,10 @@ var ActionList = (function(){
     if(typeof lastm[lastpos+1]=== 'string'){
     }else if (Array.isArray(lastm[lastpos+1])){
       if(typeof lastm[lastpos+1][0] === "function"){ // is action
-        lastm[lastpos+1][0](lastm[lastpos+1][1]);
-        self.next();
+        Game.text.pos.pop()
+        Game.text.pos.push(lastpos+2);
+        Game.text.pos.push(lastm[lastpos+1][0](lastm[lastpos+1][1]));
+        Game.text.pos.push(0);
       }else{
         Game.text.pos.push(randInt(0,lastm[lastpos+1].length)); // Is array
         Game.text.pos.push(0);
@@ -222,8 +225,13 @@ var Events = (function(){
   }
 
   self.give_item = function(action){
-    mc.inventory.push(action);
-    mc.inventory = mc.inventory.slice(0, MAX_INVENTORY_SIZE);
+    if (lmd[mc.map].items[Game.text.door_id][action] > 0){
+      lmd[mc.map].items[Game.text.door_id][action]--;
+      mc.inventory.push(action);
+      mc.inventory = mc.inventory.slice(0, MAX_INVENTORY_SIZE);
+      return 0;
+    }
+    return 1;
   }
 
   return self;
