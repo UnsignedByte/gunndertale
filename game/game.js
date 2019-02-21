@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 23:12:01, 17-Feb-2019
+ * @Last modified time: 14:45:45, 21-Feb-2019
  */
 
 //no more blurring! :)
@@ -39,7 +39,9 @@ function draw(){
 function second(){
   mc.time++;
   mc.time%=86400;
+  
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
+  window.localStorage.setItem("lmd", JSON.stringify(lmd));
 }
 
 var secondinterval = setInterval(second, 1000);
