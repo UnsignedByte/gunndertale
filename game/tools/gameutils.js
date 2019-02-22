@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 14:44:37, 21-Feb-2019
+ * @Last modified time: 19:45:25, 21-Feb-2019
  */
 
 var Game = {
@@ -182,30 +182,40 @@ var ActionList = (function(){
     return l;
   }
 
-  self.next = function(){
-    let lastpos = Game.text.pos.pop()
-    let lastm = self.get_pos();
-
-    Game.text.pos.push(lastpos+1);
+  function parse_currpos(lastm, pos){
     Game.text.options = null;
-    if (lastm.length === lastpos+1){
+    if (lastm.length === pos){
       Game.curr_action_type="game";
       return null;
     }
-    if(typeof lastm[lastpos+1]=== 'string'){
-    }else if (Array.isArray(lastm[lastpos+1])){
-      if(typeof lastm[lastpos+1][0] === "function"){ // is action
+    if(typeof lastm[pos]=== 'string'){
+    }else if (Array.isArray(lastm[pos])){
+      if(typeof lastm[pos][0] === "function"){ // is action
         Game.text.pos.pop()
-        Game.text.pos.push(lastpos+2);
-        Game.text.pos.push(lastm[lastpos+1][0](lastm[lastpos+1][1]));
+        Game.text.pos.push(pos+1);
+        Game.text.pos.push(lastm[pos][0](lastm[pos][1]));
         Game.text.pos.push(0);
       }else{
-        Game.text.pos.push(randInt(0,lastm[lastpos+1].length)); // Is array
+        Game.text.pos.push(randInt(0,lastm[pos].length)); // Is array
         Game.text.pos.push(0);
       }
-    }else if (lastm[lastpos+1].constructor == Object){ //Is dictionary
-      Game.text.options = lastm[lastpos+1];
+    }else if (lastm[pos].constructor == Object){ //Is dictionary
+      Game.text.options = lastm[pos];
       Game.text.chosen = 0;
+    }
+  }
+
+  self.next = function(){
+    let lastpos = Game.text.pos.pop();
+    let lastm = self.get_pos();
+    Game.text.pos.push(lastpos+1);
+    parse_currpos(lastm, lastpos+1);
+
+    if(typeof self.get_pos() != 'string'){
+      let pos = Game.text.pos.pop();
+      let m = self.get_pos();
+      Game.text.pos.push(pos);
+      parse_currpos(m, pos);
     }
   }
 
@@ -229,9 +239,12 @@ var Events = (function(){
       lmd[mc.map].items[Game.text.door_id][action]--;
       mc.inventory.push(action);
       mc.inventory = mc.inventory.slice(0, MAX_INVENTORY_SIZE);
-      return 0;
     }
-    return 1;
+    return 0;
+  }
+
+  self.get_amount = function(action){;
+    return Math.min(action[2],Math.max(action[1], lmd[mc.map].items[Game.text.door_id][action[0]]));
   }
 
   return self;

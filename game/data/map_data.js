@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 14:43:01, 21-Feb-2019
+ * @Last modified time: 19:29:08, 21-Feb-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -56,15 +56,18 @@ var MAP_DATA = {
     actions: {
       0x00ffff: {
         dir: [1],
-        responses: [
-          ["You see a frying pan left on the counter.", "Pick it up?", {
-            yes: [
-              [Events.give_item, "Frying Pan"],
-              [["You recieved \"Frying Pan\"!"], ["There were no more frying pans to recieve."]]
-            ],
-            no: ["You left the pan where it was."]
-          }]
-        ]
+        responses: [[
+          [Events.get_amount, ["Frying Pan", 0, 1]], [
+            ["The table is empty"],
+            ["You see a frying pan left on the counter.", "Pick it up?", {
+              yes: [
+                [Events.give_item, "Frying Pan"],
+                [["You recieved \"Frying Pan\"!"]]
+              ],
+              no: ["You left the pan where it was."]
+            }]
+          ]
+        ]]
       },
       0x0000ff: {
         dir: [1],
