@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 22:48:31, 20-Feb-2019
+ * @Last modified time: 19:35:21, 28-Feb-2019
  */
 
 
@@ -61,6 +61,19 @@ var KEYS_DOWN = {
   67:false,
   17:false
 };
+
+var KEY_NAMES = {
+  "37":"left",
+  "38":"up",
+  "39":"right",
+  "40":"down",
+  "90":"z",
+  "13":"z",
+  "16":"x",
+  "88":"x",
+  "17":"c",
+  "67":"c"
+}
 
 const SWITCH_DIRS = [2, 1, 3, 0];
 

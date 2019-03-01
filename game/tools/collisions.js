@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 08:19:47, 18-Feb-2019
+ * @Last modified time: 19:13:37, 28-Feb-2019
  */
 
 var Collision = (function(){
@@ -74,7 +74,7 @@ var Collision = (function(){
   }
 
   self.check_doors = function(){
-    let currmapdoors = MAP_DATA[mc.map].doors
+    let currmapdoors = MAP_DATA[mc.map].doors;
     Object.keys(currmapdoors).forEach(key => {
       if (check_in_dir(MOV_SPEED, Number(key))){
         Game.curr_action_type = "darken";
@@ -83,8 +83,18 @@ var Collision = (function(){
     });
   }
 
+  self.check_containers = function(){
+    let currcontainers = lmd[mc.map].containers;
+    Object.keys(currcontainers).forEach(key => {
+      if (check_in_dir(0, Number(key))){
+        Game.curr_action_type = "container";
+        Game.container.id = Number(key);
+        Game.inventory.chosen = 0;
+      }
+    });
+  }
   self.check_actions = function(){
-    let currmapacts = MAP_DATA[mc.map].actions
+    let currmapacts = MAP_DATA[mc.map].actions;
     Object.keys(currmapacts).forEach(key => {
       if (currmapacts[key].dir.indexOf(mc.dir[0]) >= 0  && check_in_dir(0, Number(key))){
         Game.curr_action_type = "text";

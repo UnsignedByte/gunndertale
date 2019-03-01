@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 14:45:45, 21-Feb-2019
+ * @Last modified time: 10:39:36, 22-Feb-2019
  */
 
 //no more blurring! :)
@@ -32,6 +32,10 @@ function draw(){
       Window.render();
       Effects.inventory();
       break;
+    case "container":
+      Window.render();
+      Effects.container();
+      break;
     default:
   }
 }
@@ -39,7 +43,7 @@ function draw(){
 function second(){
   mc.time++;
   mc.time%=86400;
-  
+
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
   window.localStorage.setItem("lmd", JSON.stringify(lmd));
 }

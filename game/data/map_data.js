@@ -3,28 +3,38 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 19:29:08, 21-Feb-2019
+ * @Last modified time: 19:26:16, 28-Feb-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
   "secret":{
-    items:{}
+    items:{},
+    containers:{}
   },
   "house":{
-    items:{}
+    items:{},
+    containers:{}
   },
   "livingroom":{
     items:{
       0x00ffff:{
         "Frying Pan":1
       }
-    }
+    },
+    containers:{}
   },
   "hallway":{
-    items:{}
+    items:{},
+    containers:{
+      0x0000ff:[
+        "Airpods",
+        "Macbook"
+      ]
+    }
   },
   "bedroom":{
-    items:{}
+    items:{},
+    containers:{}
   }
 }
 
@@ -46,7 +56,8 @@ var MAP_DATA = {
     doors: {
       0xff0000: ["livingroom", 39, 271],
       0xffff00: ["secret", 135, 175]
-    }
+    },
+    actions:{}
   },
   "livingroom": {
     doors: {
@@ -114,12 +125,6 @@ var MAP_DATA = {
         dir: [1],
         responses: [
           ["The bathroom door is locked."]
-        ]
-      },
-      0x0000ff: {
-        dir: [1],
-        responses: [
-          ["You don't own much so it's empty."]
         ]
       },
       0x00ffff: {

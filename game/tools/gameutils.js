@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 19:45:25, 21-Feb-2019
+ * @Last modified time: 19:47:59, 28-Feb-2019
  */
 
 var Game = {
@@ -22,6 +22,10 @@ var Game = {
   inventory:{
     chosen:null,
     chosen_action:null
+  },
+  container:{
+    id:null,
+    chosen:null
   }
 };
 
@@ -29,36 +33,37 @@ function test_keypress(){
   let is_moving = false;
   Object.keys(KEYS_DOWN).forEach(key => {
     if (KEYS_DOWN[key] === true){
+      pkey = KEY_NAMES[key];
+      KEYS_DOWN[key] = false;
       switch (Game.curr_action_type){
         case "game":
           if (37<=Number(key) && Number(key)<=40){
+            KEYS_DOWN[key]=true;
             if(!Game.curr_collision_data[Number(key)-37]){
               is_moving=true;
-              switch (key){
-                case "37":
+              switch (pkey){
+                case "left":
                   mc.pos[0]-=MOV_SPEED;
                   break;
-                case "38":
+                case "up":
                   mc.pos[1]-=MOV_SPEED;
                   break;
-                case "39":
+                case "right":
                   mc.pos[0]+=MOV_SPEED;
                   break;
-                case "40":
+                case "down":
                   mc.pos[1]+=MOV_SPEED;
                   break;
               }
             }
             mc.dir[0]=SWITCH_DIRS[Number(key)-37]
           }else{
-            KEYS_DOWN[key]=false;
-            switch (key){
-              case "90":
-              case "13":
+            switch (pkey){
+              case "z":
                 Collision.check_actions();
+                Collision.check_containers();
                 break;
-              case "17":
-              case "67":
+              case "c":
                 Game.inventory.chosen = 0;
                 Game.curr_action_type="inventory";
                 break;
@@ -67,12 +72,10 @@ function test_keypress(){
           }
           break;
         case "text":
-          KEYS_DOWN[key]=false;
-          switch(key){
-            case "90":
-            case "13":
+          switch(pkey){
+            case "z":
               if(Effects.pub_vars.text.done){
-                if(Game.text.options != null){
+                if(Game.text.options !== null){
                   Game.text.pos.push(Game.text.chosenKey);
                   Game.text.pos.push(-1);
                 }
@@ -80,59 +83,42 @@ function test_keypress(){
                 Effects.pub_vars.text.done = "pending";
               }
               break;
-            case "16":
-            case "88":
+            case "x":
               Effects.pub_vars.text.done = true;
               break;
-            case "37":
+            case "left":
               Game.text.chosen=0;
               break;
-            case "38":
+            case "up":
               Game.text.chosen=2;
               break;
-            case "39":
+            case "right":
               Game.text.chosen=1;
               break;
-            case "40":
+            case "down":
               Game.text.chosen=3;
               break;
             default:
           }
           break;
         case "inventory":
-          KEYS_DOWN[key] = false;
-          switch(key){
-            case "37":
-              if(Game.inventory.chosen_action != null){
-                Game.inventory.chosen_action+=2;
-                Game.inventory.chosen_action%=3;
-              }
+          switch(pkey){
+            case "left":
+              Game.inventory.chosen_action = loop_add(Game.inventory.chosen_action,2, 3);
               break;
-            case "38":
-              if(Game.inventory.chosen_action === null){
-                Game.inventory.chosen+=mc.inventory.length-1;
-                Game.inventory.chosen%=mc.inventory.length;
-              }
+            case "up":
+              if(Game.inventory.chosen_action === null) Game.inventory.chosen = loop_add(Game.inventory.chosen,-1, mc.inventory.length);
               break;
-            case "39":
-              if(Game.inventory.chosen_action != null){
-                Game.inventory.chosen_action+=1;
-                Game.inventory.chosen_action%=3;
-              }
+            case "right":
+              Game.inventory.chosen_action = loop_add(Game.inventory.chosen_action,1, 3);
               break;
-            case "40":
-              if(Game.inventory.chosen_action === null){
-                Game.inventory.chosen++;
-                Game.inventory.chosen%=mc.inventory.length;
-              }
+            case "down":
+              if(Game.inventory.chosen_action === null) Game.inventory.chosen = loop_add(Game.inventory.chosen,1, mc.inventory.length);
               break;
-
-            case "17":
-            case "67":
+            case "c":
               Game.curr_action_type="game";
               break;
-            case "90":
-            case "13":
+            case "z":
               if(Game.inventory.chosen_action === null){
                 Game.inventory.chosen_action = 0;
               }else{
@@ -148,6 +134,40 @@ function test_keypress(){
                 Game.inventory.chosen = 0;
                 Game.inventory.chosen_action = null;
               }
+              break;
+            default:
+          }
+          break;
+        case "container":
+          switch(pkey){
+            case "left":
+              Game.inventory.chosen = null;
+              Game.container.chosen = 0;
+              break;
+            case "up":
+              Game.inventory.chosen = loop_add(Game.inventory.chosen,-1, mc.inventory.length);
+              Game.container.chosen = loop_add(Game.container.chosen,-1, lmd[mc.map].containers[Game.container.id].length);
+              break;
+            case "right":
+              Game.inventory.chosen = 0;
+              Game.container.chosen = null;
+              break;
+            case "down":
+              Game.inventory.chosen = loop_add(Game.inventory.chosen,1, mc.inventory.length);
+              Game.container.chosen = loop_add(Game.container.chosen,1, lmd[mc.map].containers[Game.container.id].length);
+              break;
+            case "z":
+              if (Game.inventory.chosen !== null && lmd[mc.map].containers[Game.container.id].length < MAX_INVENTORY_SIZE){
+                lmd[mc.map].containers[Game.container.id].push(mc.inventory[Game.inventory.chosen]);
+                mc.inventory.splice(Game.inventory.chosen, 1);
+              }else if (Game.container.chosen !== null && mc.inventory.length < MAX_INVENTORY_SIZE){
+                mc.inventory.push(lmd[mc.map].containers[Game.container.id][Game.container.chosen]);
+                lmd[mc.map].containers[Game.container.id].splice(Game.container.chosen, 1);
+              }
+              break;
+            case "x":
+            case "c":
+              Game.curr_action_type = "game";
               break;
             default:
           }
@@ -211,7 +231,7 @@ var ActionList = (function(){
     Game.text.pos.push(lastpos+1);
     parse_currpos(lastm, lastpos+1);
 
-    if(typeof self.get_pos() != 'string'){
+    if(typeof self.get_pos() !== 'string'){
       let pos = Game.text.pos.pop();
       let m = self.get_pos();
       Game.text.pos.push(pos);
@@ -227,7 +247,7 @@ var Events = (function(){
   var self = {};
 
   self.text = function(){
-    if (Game.text.options != null){
+    if (Game.text.options !== null){
       Effects.options();
     }else{
       Effects.text(ActionList.get_pos());

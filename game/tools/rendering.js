@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 07:58:16, 18-Feb-2019
+ * @Last modified time: 19:20:26, 28-Feb-2019
  */
 
 var Window = (function(){
@@ -79,7 +79,6 @@ var Effects = (function(){
     },
     inventory:{
       box:{
-        left_shift:36*Window.zoom,
         margin:12*Window.zoom,
         width:108*Window.zoom,
         border_thicc:3*Window.zoom
@@ -123,24 +122,21 @@ var Effects = (function(){
     }
   }
 
-  function draw_text_box(){
+  function draw_bounded_box(x, y, w, h, lw=Vars.text.box.border_thicc){
     context.fillStyle = "black";
-    context.fillRect((Window.width*Window.zoom-Vars.text.box.width)/2,
-      Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height,
-      Vars.text.box.width,
-      Vars.text.box.height);
+    context.fillRect(x, y, w, h);
     context.beginPath();
-    context.lineWidth = Vars.text.box.border_thicc.toString();
+    context.lineWidth = lw.toString();
     context.strokeStyle = "white";
-    context.rect((Window.width*Window.zoom-Vars.text.box.width)/2,
-      Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height,
-      Vars.text.box.width,
-      Vars.text.box.height);
+    context.rect(x,y,w,h);
     context.stroke();
   }
 
   self.text = function(text){
-    draw_text_box();
+    draw_bounded_box((Window.width*Window.zoom-Vars.text.box.width)/2,
+      Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height,
+      Vars.text.box.width,
+      Vars.text.box.height);
     context.fillStyle = "white";
     context.font = Vars.text.font_size.toString()+"px VT323";
 
@@ -155,7 +151,6 @@ var Effects = (function(){
     }
     let last = Math.ceil(Vars.text.pos/Vars.text.num_frames)+1;
     fill_text(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size, Vars.text.box.width-Vars.text.font_size);
-    // context.fillText(text.substring(0, last), (Window.width*Window.zoom-Vars.text.box.width)/2+Vars.text.box.border_thicc*1.5, Window.height*Window.zoom-Vars.text.box.bottom_margin-Vars.text.box.height+Vars.text.font_size);
     if(last > text.length){
       self.pub_vars.text.done = true;
     }
@@ -189,38 +184,38 @@ var Effects = (function(){
     });
   }
 
-  self.inventory = function(){
-
-    context.beginPath();
-    context.lineWidth = Vars.inventory.box.border_thicc.toString();
-    context.strokeStyle = "white";
-    context.rect((Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift, Vars.inventory.box.margin, Vars.inventory.box.width, Window.height*Window.zoom-2*Vars.inventory.box.margin);
-    context.stroke();
-    context.fillStyle = "black";
-    context.fillRect((Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift, Vars.inventory.box.margin, Vars.inventory.box.width, Window.height*Window.zoom-2*Vars.inventory.box.margin);
-
+  function list_text(x, y, l, spacing){
     context.fillStyle = "white";
     context.font = Vars.text.font_size.toString()+"px VT323";
-    for(let i = 0; i < mc.inventory.length; i++){
-      if(mc.inventory[i] != null){
-        context.fillText(mc.inventory[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.text.font_size, Vars.inventory.box.margin+Vars.text.font_size*1.5*(68/91)*(i+1));
-      }
-      if(i === Game.inventory.chosen){
-        context.drawImage(MC_DATA.cursor, (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.text.font_size-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
-          Vars.inventory.box.margin+Vars.text.font_size*1.5*(68/91)*(i+1)-MC_DATA.cursor.height*Window.zoom,
-          MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom);
+    for(let i = 0; i < l.length; i++){
+      if(typeof l[i] === 'string'){
+        context.fillText(l[i], x, y+spacing*i);
       }
     }
+  }
+
+  self.inventory = function(){
+    draw_bounded_box(Window.width*Window.zoom/2, Vars.inventory.box.margin, Vars.inventory.box.width, Window.height*Window.zoom-2*Vars.inventory.box.margin);
+
+    let x = Window.width*Window.zoom/2+Vars.text.font_size;
+    let y = Vars.inventory.box.margin;
+    let spacing = Vars.text.font_size*1.5*(68/91);
+    list_text(x, y+spacing, mc.inventory, spacing);
+    if (Game.inventory.chosen === null) return;
+    context.drawImage(MC_DATA.cursor, x-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
+      y+spacing*(Game.inventory.chosen+1)-MC_DATA.cursor.height*Window.zoom,
+      MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom);
+
     let action_list = ["USE", "INFO", "DROP"];
     context.textAlign="left";
     for(let i = 0; i < 3; i++){
       let twidth = context.measureText(action_list[i]).width;
       if (i === Game.inventory.chosen_action){
-        context.drawImage(MC_DATA.cursor, (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.inventory.box.width*(2*i+1)/6-twidth/2-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
+        context.drawImage(MC_DATA.cursor, Window.width*Window.zoom/2+Vars.inventory.box.width*(2*i+1)/6-twidth/2-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
           Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2-MC_DATA.cursor.height*Window.zoom,
           MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom)
       }
-      context.fillText(action_list[i], (Window.width*Window.zoom-Vars.inventory.box.width)/2+Vars.inventory.box.left_shift+Vars.inventory.box.width*(2*i+1)/6-twidth/2, Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2);
+      context.fillText(action_list[i], Window.width*Window.zoom/2+Vars.inventory.box.width*(2*i+1)/6-twidth/2, Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2);
     }
     context.textAlign="left";
   }
@@ -232,6 +227,33 @@ var Effects = (function(){
     context.fillStyle="white";
     context.fillText(`${t.h}:${t.m}:${t.s}`, Window.width*Window.zoom-Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
     context.textAlign = "left";
+  }
+
+  self.container = function(){
+    draw_bounded_box(Window.width*Window.zoom/2-Vars.inventory.box.width, Vars.inventory.box.margin, Vars.inventory.box.width*2, Window.height*Window.zoom-2*Vars.inventory.box.margin);
+    context.beginPath();
+    context.fillStyle = "white";
+    context.lineWidth = Window.zoom/2;
+    context.moveTo(Window.width*Window.zoom/2, Vars.inventory.box.margin*1.5);
+    context.lineTo(Window.width*Window.zoom/2,  Window.height*Window.zoom-Vars.inventory.box.margin*1.5)
+    context.stroke();
+
+    let x = Window.width*Window.zoom/2+Vars.text.font_size;
+    let y = Vars.inventory.box.margin;
+    let spacing = Vars.text.font_size*1.5*(68/91);
+    list_text(x, y+spacing, mc.inventory, spacing);
+    if (Game.inventory.chosen != null){
+      context.drawImage(MC_DATA.cursor, x-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
+        y+spacing*(Game.inventory.chosen+1)-MC_DATA.cursor.height*Window.zoom,
+        MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom)
+    }
+    x-=Vars.inventory.box.width;
+    list_text(x, y+spacing, lmd[mc.map].containers[Game.container.id], spacing);
+    if (Game.container.chosen != null){
+      context.drawImage(MC_DATA.cursor, x-MC_DATA.cursor.width*Window.zoom-Vars.text.font_size/4,
+        y+spacing*(Game.container.chosen+1)-MC_DATA.cursor.height*Window.zoom,
+        MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom)
+    }
   }
 
   return self;
