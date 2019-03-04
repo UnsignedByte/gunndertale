@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 19:20:26, 28-Feb-2019
+ * @Last modified time: 23:49:17, 02-Mar-2019
  */
 
 var Window = (function(){
@@ -41,6 +41,7 @@ var Window = (function(){
     drawImage(mc.currAnim, mc.pos);
     drawImage(MAP_DATA[mc.map].front, [0, 0]);
     Effects.displaytime();
+    Effects.happiness();
   }
 
   self.get_map = function(){
@@ -154,6 +155,11 @@ var Effects = (function(){
     if(last > text.length){
       self.pub_vars.text.done = true;
     }
+  }
+
+  self.happiness = function(){
+
+    fill_text("Happiness:"+Game.stats.happiness, Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
   }
 
   self.options = function(){

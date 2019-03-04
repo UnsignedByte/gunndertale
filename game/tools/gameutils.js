@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 19:47:59, 28-Feb-2019
+ * @Last modified time: 11:10:06, 03-Mar-2019
  */
 
 var Game = {
@@ -26,6 +26,9 @@ var Game = {
   container:{
     id:null,
     chosen:null
+  },
+  stats:{
+    happiness:100
   }
 };
 
@@ -119,7 +122,7 @@ function test_keypress(){
               Game.curr_action_type="game";
               break;
             case "z":
-              if(Game.inventory.chosen_action === null){
+              if(Game.inventory.chosen_action === null && mc.inventory.length > 0){
                 Game.inventory.chosen_action = 0;
               }else{
                 switch(Game.inventory.chosen_action){
@@ -213,7 +216,7 @@ var ActionList = (function(){
       if(typeof lastm[pos][0] === "function"){ // is action
         Game.text.pos.pop()
         Game.text.pos.push(pos+1);
-        Game.text.pos.push(lastm[pos][0](lastm[pos][1]));
+        Game.text.pos.push(lastm[pos][0](...lastm[pos][1]));
         Game.text.pos.push(0);
       }else{
         Game.text.pos.push(randInt(0,lastm[pos].length)); // Is array
@@ -263,8 +266,39 @@ var Events = (function(){
     return 0;
   }
 
-  self.get_amount = function(action){;
-    return Math.min(action[2],Math.max(action[1], lmd[mc.map].items[Game.text.door_id][action[0]]));
+  self.get_amount = function(action, min, max){;
+    return Math.min(max,Math.max(min, lmd[mc.map].items[Game.text.door_id][action]));
+  }
+
+  return self;
+}());
+
+
+var Stats = (function(){
+  var self = {};
+
+  function calc_subcategory(category, subcategory){
+    let sum = 0;
+    Object.keys(mc.stats[category][subcategory]).forEach(key => {
+      let val = mc.stats[category][subcategory][key];
+      if(val.dt > 0 && mc.time%val.dt === 0){
+        val.val=val.val*(1-val.dr);
+      }
+      if (Math.abs(val.val) < 1){
+        delete mc.stats[category][subcategory][key];
+        return;
+      }
+      sum+=val.val;
+      mc.stats[category][subcategory][key] = val;
+    });
+    return sum;
+  }
+
+  self.calculate = function(){
+    Game.stats.happiness = 0;
+    Object.keys(mc.stats.happiness).forEach(key => {
+      Game.stats.happiness+=Math.round(MC_DATA.stats.happiness[key](calc_subcategory("happiness",key)));
+    });
   }
 
   return self;

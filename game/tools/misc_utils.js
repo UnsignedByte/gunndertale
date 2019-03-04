@@ -3,7 +3,7 @@
  * @Date:   22:39:11, 24-Nov-2018
  * @Filename: misc_utils.js
  * @Last modified by:   edl
- * @Last modified time: 19:18:47, 28-Feb-2019
+ * @Last modified time: 00:21:59, 03-Mar-2019
  */
 
 function array_sum(arr1, arr2){
@@ -45,4 +45,8 @@ function loop_add(a, b, mod){
     return (a+b+mod)%mod
   }
   return null;
+}
+
+function minmax(a, min, max){
+  return Math.min(max, Math.max(a, min));
 }

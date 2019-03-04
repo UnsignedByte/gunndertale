@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 19:26:16, 28-Feb-2019
+ * @Last modified time: 12:01:03, 01-Mar-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -72,7 +72,7 @@ var MAP_DATA = {
             ["The table is empty"],
             ["You see a frying pan left on the counter.", "Pick it up?", {
               yes: [
-                [Events.give_item, "Frying Pan"],
+                [Events.give_item, ["Frying Pan"]],
                 [["You recieved \"Frying Pan\"!"]]
               ],
               no: ["You left the pan where it was."]
