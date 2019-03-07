@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 22:26:49, 06-Mar-2019
+ * @Last modified time: 23:01:28, 06-Mar-2019
  */
 
 var Game = {
@@ -284,41 +284,6 @@ var Events = (function(){
 
   self.get_amount = function(action, min, max){
     return Math.min(max,Math.max(min, lmd[mc.map].items[Game.text.door_id][action]));
-  };
-
-  return self;
-}());
-
-
-var Stats = (function(){
-  var self = {};
-
-  function calc_subcategory(category, subcategory){
-    let sum = 0;
-    Object.keys(mc.stats[category][subcategory]).forEach(key => {
-      let val = mc.stats[category][subcategory][key];
-      if(val.dt > 0 && mc.time%val.dt === 0){
-        val.val=val.val*(1-val.dr);
-      }
-      if (Math.abs(val.val) < 1){
-        delete mc.stats[category][subcategory][key];
-        return;
-      }
-      sum+=val.val;
-      mc.stats[category][subcategory][key] = val;
-    });
-    return sum;
-  };
-
-  self.calculate = function(){
-    Game.stats.happiness = 0;
-    Object.keys(mc.stats.happiness).forEach(key => {
-      Game.stats.happiness+=Math.round(MC_DATA.stats.happiness[key](calc_subcategory("happiness",key)));
-    });
-  };
-
-  self.add_subsubcategory = function(category, subcategory, name, vals){
-    mc.stats[category][subcategory][name] = dict_add(mc.stats[category][subcategory][name], vals);
   };
 
   return self;
