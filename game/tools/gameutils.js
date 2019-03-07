@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 21:00:06, 06-Mar-2019
+ * @Last modified time: 22:26:49, 06-Mar-2019
  */
 
 var Game = {
@@ -267,6 +267,10 @@ var Events = (function(){
 
   self.use_item = function(item){
     self.initText(ITEM_DATA[item].action.message);
+    for(let i = 0; i < ITEM_DATA[item].action.stats.length; i++){
+      let sub = ITEM_DATA[item].action.stats[i];
+      Stats.add_subsubcategory("happiness", sub[0], item, sub[1]);
+    }
   };
 
   self.give_item = function(action){
@@ -311,6 +315,10 @@ var Stats = (function(){
     Object.keys(mc.stats.happiness).forEach(key => {
       Game.stats.happiness+=Math.round(MC_DATA.stats.happiness[key](calc_subcategory("happiness",key)));
     });
+  };
+
+  self.add_subsubcategory = function(category, subcategory, name, vals){
+    mc.stats[category][subcategory][name] = dict_add(mc.stats[category][subcategory][name], vals);
   };
 
   return self;
