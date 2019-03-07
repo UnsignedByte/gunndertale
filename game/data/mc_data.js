@@ -3,7 +3,7 @@
  * @Date:   18:22:30, 25-Nov-2018
  * @Filename: mc_data.js
  * @Last modified by:   edl
- * @Last modified time: 08:13:09, 04-Mar-2019
+ * @Last modified time: 20:59:34, 06-Mar-2019
  */
 
 var MAX_INVENTORY_SIZE = 16;
@@ -36,7 +36,7 @@ var DEFAULT_MC = {
       }
     }
   }
-}
+};
 
 var MC_DATA = {
  animations:[

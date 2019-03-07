@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 18:34:21, 06-Mar-2019
+ * @Last modified time: 21:00:06, 06-Mar-2019
  */
 
 var Game = {
@@ -203,7 +203,7 @@ var ActionList = (function(){
       l = l[pos[i]];
     }
     return l;
-  }
+  };
 
   function parse_currpos(lastm, pos){
     Game.text.options = null;
@@ -240,7 +240,7 @@ var ActionList = (function(){
       Game.text.pos.push(pos);
       parse_currpos(m, pos);
     }
-  }
+  };
 
   return self;
 }());
@@ -255,7 +255,7 @@ var Events = (function(){
     Game.text.door_id = key;
     Game.text.pos = [-1];
     ActionList.next();
-  }
+  };
 
   self.text = function(){
     if (Game.text.options !== null){
@@ -263,11 +263,11 @@ var Events = (function(){
     }else{
       Effects.text(ActionList.get_pos());
     }
-  }
+  };
 
   self.use_item = function(item){
     self.initText(ITEM_DATA[item].action.message);
-  }
+  };
 
   self.give_item = function(action){
     if (lmd[mc.map].items[Game.text.door_id][action] > 0){
@@ -276,11 +276,11 @@ var Events = (function(){
       mc.inventory = mc.inventory.slice(0, MAX_INVENTORY_SIZE);
     }
     return 0;
-  }
+  };
 
-  self.get_amount = function(action, min, max){;
+  self.get_amount = function(action, min, max){
     return Math.min(max,Math.max(min, lmd[mc.map].items[Game.text.door_id][action]));
-  }
+  };
 
   return self;
 }());
@@ -304,14 +304,14 @@ var Stats = (function(){
       mc.stats[category][subcategory][key] = val;
     });
     return sum;
-  }
+  };
 
   self.calculate = function(){
     Game.stats.happiness = 0;
     Object.keys(mc.stats.happiness).forEach(key => {
       Game.stats.happiness+=Math.round(MC_DATA.stats.happiness[key](calc_subcategory("happiness",key)));
     });
-  }
+  };
 
   return self;
 }());

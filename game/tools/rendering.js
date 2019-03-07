@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 23:49:17, 02-Mar-2019
+ * @Last modified time: 20:59:00, 06-Mar-2019
  */
 
 var Window = (function(){
@@ -60,7 +60,7 @@ var Effects = (function(){
     text:{
       done:false
     }
-  }
+  };
 
   var Vars = {
     darken:{
@@ -102,7 +102,7 @@ var Effects = (function(){
     context.fillStyle="rgba(0, 0, 0, "+Vars.darken.opacity+")"
     context.fillRect(0, 0, canv.width, canv.height);
     // context.stroke();
-  }
+  };
 
   function fill_text(str, x,  y, width=null, size=Vars.text.font_size){
     context.font = size.toString()+"px VT323";
@@ -155,12 +155,12 @@ var Effects = (function(){
     if(last > text.length){
       self.pub_vars.text.done = true;
     }
-  }
+  };
 
   self.happiness = function(){
 
     fill_text("Happiness:"+Game.stats.happiness, Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
-  }
+  };
 
   self.options = function(){
     self.pub_vars.text.done = true;
@@ -188,7 +188,7 @@ var Effects = (function(){
 
       a++;
     });
-  }
+  };
 
   function list_text(x, y, l, spacing){
     context.fillStyle = "white";
@@ -224,7 +224,7 @@ var Effects = (function(){
       context.fillText(action_list[i], Window.width*Window.zoom/2+Vars.inventory.box.width*(2*i+1)/6-twidth/2, Window.height*Window.zoom-Vars.inventory.box.margin-Vars.text.font_size/2);
     }
     context.textAlign="left";
-  }
+  };
 
   self.displaytime = function(){
     context.textAlign = "right";
@@ -260,7 +260,7 @@ var Effects = (function(){
         y+spacing*(Game.container.chosen+1)-MC_DATA.cursor.height*Window.zoom,
         MC_DATA.cursor.width*Window.zoom, MC_DATA.cursor.height*Window.zoom)
     }
-  }
+  };
 
   return self;
 }());

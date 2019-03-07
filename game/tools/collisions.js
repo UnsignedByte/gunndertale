@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 08:20:41, 04-Mar-2019
+ * @Last modified time: 20:59:56, 06-Mar-2019
  */
 
 var Collision = (function(){
@@ -18,7 +18,7 @@ var Collision = (function(){
     map_data_canv.height = cmap.height;
     map_data_canv.getContext('2d').drawImage(cmap, 0, 0);
     return map_data_canv;
-  }
+  };
 
   function check_rect_player(dst, match_col){
     return [c_c(mc.pos[0]-dst, mc.pos[1], 0, mc.currAnim.height, match_col),
@@ -71,7 +71,7 @@ var Collision = (function(){
            check_in_dir(MOV_SPEED, 0, dir=1),
            check_in_dir(MOV_SPEED, 0, dir=2),
            check_in_dir(MOV_SPEED, 0, dir=3)]
-  }
+  };
 
   self.check_doors = function(){
     let currmapdoors = MAP_DATA[mc.map].doors;
@@ -81,7 +81,7 @@ var Collision = (function(){
         Game.cmde = currmapdoors[key];
       }
     });
-  }
+  };
 
   self.check_containers = function(){
     let currcontainers = lmd[mc.map].containers;
@@ -92,7 +92,7 @@ var Collision = (function(){
         Game.inventory.chosen = 0;
       }
     });
-  }
+  };
   self.check_actions = function(){
     let currmapacts = MAP_DATA[mc.map].actions;
     Object.keys(currmapacts).forEach(key => {
@@ -100,7 +100,7 @@ var Collision = (function(){
         Events.initText(currmapacts[key].responses, key);
       }
     });
-  }
+  };
 
   return self;
 }());

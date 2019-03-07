@@ -3,7 +3,7 @@
  * @Date:   16:09:05, 10-Feb-2019
  * @Filename: item_data.js
  * @Last modified by:   edl
- * @Last modified time: 08:16:50, 04-Mar-2019
+ * @Last modified time: 20:59:41, 06-Mar-2019
  */
 
 var ITEM_DATA = {
@@ -42,4 +42,4 @@ var ITEM_DATA = {
       message:"You wore the sweater and feel cool."
     }
   }
-}
+};

@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 12:01:03, 01-Mar-2019
+ * @Last modified time: 20:59:29, 06-Mar-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -36,7 +36,7 @@ var DEFAULT_LOCAL_MAP_DATA = {
     items:{},
     containers:{}
   }
-}
+};
 
 var MAP_DATA = {
   "secret": {
@@ -187,7 +187,7 @@ var MAP_DATA = {
       }
     }
   }
-}
+};
 
 Object.keys(MAP_DATA).forEach(key => {
   let types = ["back", "front", "map"]
