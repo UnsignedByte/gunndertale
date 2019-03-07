@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 11:10:06, 03-Mar-2019
+ * @Last modified time: 18:34:21, 06-Mar-2019
  */
 
 var Game = {
@@ -126,10 +126,10 @@ function test_keypress(){
                 Game.inventory.chosen_action = 0;
               }else{
                 switch(Game.inventory.chosen_action){
-                  case 0:
-                    break;
                   case 1:
                     break;
+                  case 0:
+                    Events.use_item(mc.inventory[Game.inventory.chosen]);
                   case 2:
                     mc.inventory.splice(Game.inventory.chosen, 1);
                     break;
@@ -249,12 +249,24 @@ var ActionList = (function(){
 var Events = (function(){
   var self = {};
 
+  self.initText = function(full, key=null){
+    Game.curr_action_type = "text";
+    Game.text.full = [full];
+    Game.text.door_id = key;
+    Game.text.pos = [-1];
+    ActionList.next();
+  }
+
   self.text = function(){
     if (Game.text.options !== null){
       Effects.options();
     }else{
       Effects.text(ActionList.get_pos());
     }
+  }
+
+  self.use_item = function(item){
+    self.initText(ITEM_DATA[item].action.message);
   }
 
   self.give_item = function(action){

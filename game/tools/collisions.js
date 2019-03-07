@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 19:13:37, 28-Feb-2019
+ * @Last modified time: 08:20:41, 04-Mar-2019
  */
 
 var Collision = (function(){
@@ -97,11 +97,7 @@ var Collision = (function(){
     let currmapacts = MAP_DATA[mc.map].actions;
     Object.keys(currmapacts).forEach(key => {
       if (currmapacts[key].dir.indexOf(mc.dir[0]) >= 0  && check_in_dir(0, Number(key))){
-        Game.curr_action_type = "text";
-        Game.text.full = [currmapacts[key].responses];
-        Game.text.door_id = key;
-        Game.text.pos = [-1];
-        ActionList.next();
+        Events.initText(currmapacts[key].responses, key);
       }
     });
   }

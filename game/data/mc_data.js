@@ -3,7 +3,7 @@
  * @Date:   18:22:30, 25-Nov-2018
  * @Filename: mc_data.js
  * @Last modified by:   edl
- * @Last modified time: 11:10:38, 03-Mar-2019
+ * @Last modified time: 08:13:09, 04-Mar-2019
  */
 
 var MAX_INVENTORY_SIZE = 16;
@@ -50,7 +50,7 @@ var MC_DATA = {
    happiness:{
      base_happiness:x=>{return x;},
      hunger:x=>{return -Math.pow(minmax(x,0,100)/10-10, 2);},
-     reputation:x=>{return x}
+     reputation:x=>{return x/2;}
    }
  }
 };
