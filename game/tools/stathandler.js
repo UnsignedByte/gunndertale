@@ -3,7 +3,7 @@
  * @Date:   23:01:22, 06-Mar-2019
  * @Filename: stathandler.js
  * @Last modified by:   edl
- * @Last modified time: 23:01:31, 06-Mar-2019
+ * @Last modified time: 17:34:30, 07-Mar-2019
  */
 
 
@@ -35,7 +35,8 @@
    };
 
    self.add_subsubcategory = function(category, subcategory, name, vals){
-     mc.stats[category][subcategory][name] = dict_add(mc.stats[category][subcategory][name], vals);
+     if (mc.stats[category][subcategory][name] === undefined) mc.stats[category][subcategory][name] = vals;
+     else mc.stats[category][subcategory][name].val+=+vals.val;
    };
 
    return self;
