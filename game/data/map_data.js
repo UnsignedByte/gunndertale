@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 20:59:29, 06-Mar-2019
+ * @Last modified time: 18:56:48, 07-Mar-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -21,7 +21,13 @@ var DEFAULT_LOCAL_MAP_DATA = {
         "Frying Pan":1
       }
     },
-    containers:{}
+    containers:{
+      0x0000ff:[
+        "Boba Milk Tea",
+        "Milk",
+        "Milk"
+      ]
+    }
   },
   "hallway":{
     items:{},
@@ -79,15 +85,6 @@ var MAP_DATA = {
             }]
           ]
         ]]
-      },
-      0x0000ff: {
-        dir: [1],
-        responses: [
-          ["You feel a bit hungry.", "Eat?", {
-            yes: ["You feel a little bit better."],
-            no: ["You go hungry as usual."]
-          }]
-        ]
       },
       0xff00ff: {
         dir: [0, 1, 2, 3],

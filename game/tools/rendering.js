@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 20:59:00, 06-Mar-2019
+ * @Last modified time: 19:36:00, 07-Mar-2019
  */
 
 var Window = (function(){
@@ -158,8 +158,11 @@ var Effects = (function(){
   };
 
   self.happiness = function(){
-
     fill_text("Happiness:"+Game.stats.happiness, Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
+
+    for(let i = 0; i < Game.stats.cqueue.length; i++){
+    fill_text(Game.stats.cqueue[i], Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91)*(i/2+2), null, Vars.text.font_size/2);
+    }
   };
 
   self.options = function(){

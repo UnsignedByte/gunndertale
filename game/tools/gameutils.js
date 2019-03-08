@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 23:01:28, 06-Mar-2019
+ * @Last modified time: 19:18:42, 07-Mar-2019
  */
 
 var Game = {
@@ -28,7 +28,8 @@ var Game = {
     chosen:null
   },
   stats:{
-    happiness:100
+    happiness:100,
+    cqueue:[]
   }
 };
 

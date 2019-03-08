@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 20:59:56, 06-Mar-2019
+ * @Last modified time: 19:06:33, 07-Mar-2019
  */
 
 var Collision = (function(){
