@@ -3,13 +3,18 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 19:18:42, 07-Mar-2019
+ * @Last modified time: 18:34:19, 17-Apr-2019
  */
 
 var Game = {
   game_anim_dir_mod:0,
   curr_collision_data:[false, false, false, false],
   curr_action_type:"game",
+  map:{
+    front:null,
+    back:null,
+    map:null
+  },
   cmde:null,
   text:{
     door_id:null,
@@ -264,6 +269,18 @@ var Events = (function(){
     }else{
       Effects.text(ActionList.get_pos());
     }
+  };
+
+  self.set_map = function(map){
+    mc.map = map;
+    Object.keys(Game.map).forEach(key => {
+      let cmap = MAP_DATA[mc.map][key];
+      let tcanv = document.createElement('canvas');
+      tcanv.width = cmap.width;
+      tcanv.height = cmap.height;
+      tcanv.getContext('2d').drawImage(cmap, 0, 0);
+      Game.map[key]=tcanv;
+    });
   };
 
   self.use_item = function(item){

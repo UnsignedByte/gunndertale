@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 16:02:56, 17-Apr-2019
+ * @Last modified time: 18:31:44, 17-Apr-2019
  */
 
 
@@ -86,9 +86,9 @@ const FRAMES_BEFORE_WALK = 10;
 init();
 
 function init(){
-    /*Double size cuz stupid bug lol*/
- canv.width = window.innerWidth * 2;
- canv.height = window.innerHeight * 2;
+  /*Double size cuz stupid bug lol*/
+  canv.width = window.innerWidth * 2;
+  canv.height = window.innerHeight * 2;
 }
 
 //Event Listeners

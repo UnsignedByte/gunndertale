@@ -3,22 +3,12 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 19:06:33, 07-Mar-2019
+ * @Last modified time: 18:33:36, 17-Apr-2019
  */
 
 var Collision = (function(){
   var self = {};
 
-  self.map_data = null;
-
-  self.get_map_data = function(){
-    let cmap = MAP_DATA[mc.map].map
-    let map_data_canv = document.createElement('canvas');
-    map_data_canv.width = cmap.width;
-    map_data_canv.height = cmap.height;
-    map_data_canv.getContext('2d').drawImage(cmap, 0, 0);
-    return map_data_canv;
-  };
 
   function check_rect_player(dst, match_col){
     return [c_c(mc.pos[0]-dst, mc.pos[1], 0, mc.currAnim.height, match_col),
@@ -49,7 +39,7 @@ var Collision = (function(){
   }
 
   function get_col_at_pix(x, y){
-   let m_data = self.map_data.getContext('2d').getImageData(x, y, 1, 1).data;
+   let m_data = Game.map.map.getContext('2d').getImageData(x, y, 1, 1).data;
    return rgbHex(m_data[0], m_data[1], m_data[2]);
   }
 
@@ -65,8 +55,6 @@ var Collision = (function(){
   }
 
   self.check_collide = function(){
-   self.map_data = self.get_map_data();
-   // return [false, false, false, false];
    return [check_in_dir(MOV_SPEED, 0, dir=0),
            check_in_dir(MOV_SPEED, 0, dir=1),
            check_in_dir(MOV_SPEED, 0, dir=2),

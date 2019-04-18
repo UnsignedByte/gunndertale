@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 19:36:00, 07-Mar-2019
+ * @Last modified time: 16:09:11, 17-Apr-2019
  */
 
 var Window = (function(){
@@ -13,18 +13,12 @@ var Window = (function(){
   self.zoom = canv.height/self.height;
   self.width = canv.width/self.zoom;
 
-  self.invis_canv = document.createElement('canvas');
-  self.invis_canv_context = self.invis_canv.getContext('2d');
-
   function get_window_pos(){
     let xpos = Math.max(Math.min(0, self.width/2-mc.pos[0]), self.width-MAP_DATA[mc.map].back.width);
     if (MAP_DATA[mc.map].back.width < self.width){
       xpos-=(self.width-MAP_DATA[mc.map].back.width)/2;
     }
     let ypos = Math.max(Math.min(0, self.height/2-mc.pos[1]), self.height-MAP_DATA[mc.map].back.height);
-    // if (MAP_DATA[mc.map].back.height < self.height){
-    //   ypos-=(self.width-MAP_DATA[mc.map].back.width)/2;
-    // }
     return [xpos, ypos];
   }
 
@@ -42,12 +36,6 @@ var Window = (function(){
     drawImage(MAP_DATA[mc.map].front, [0, 0]);
     Effects.displaytime();
     Effects.happiness();
-  }
-
-  self.get_map = function(){
-    self.invis_canv_context.width = MAP_DATA[mc.map].map.width;
-    self.invis_canv_context.height = MAP_DATA[mc.map].map.height;
-    invis_canv_context.drawImage(MAP_DATA[mc.map].map, 0, 0);
   }
 
   return self;
@@ -91,7 +79,7 @@ var Effects = (function(){
     Vars.darken.opacity+=Vars.darken.rate;
     if (Vars.darken.opacity>1.25){
       Vars.darken.rate*=-1;
-      mc.map = Game.cmde[0];
+      Events.set_map(Game.cmde[0]);
       mc.pos = [Game.cmde[1], Game.cmde[2]];
       Game.cmde = null;
     }else if (Vars.darken.opacity<0){
