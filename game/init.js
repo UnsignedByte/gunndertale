@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 18:31:44, 17-Apr-2019
+ * @Last modified time: 18:39:13, 17-Apr-2019
  */
 
 
@@ -19,6 +19,7 @@ function start_newgame(){
   lmd = DEFAULT_LOCAL_MAP_DATA;
   window.localStorage.setItem("mainchar", JSON.stringify(mc));
   window.localStorage.setItem("lmd", JSON.stringify(lmd));
+  Events.set_map(mc.map);
 }
 
 if (localStorage.getItem("mainchar") === null || localStorage.getItem("lmd") === null) {
