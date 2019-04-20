@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 18:34:19, 17-Apr-2019
+ * @Last modified time: 09:19:15, 20-Apr-2019
  */
 
 var Game = {
@@ -166,10 +166,10 @@ function test_keypress(){
               Game.container.chosen = loop_add(Game.container.chosen,1, lmd[mc.map].containers[Game.container.id].length);
               break;
             case "z":
-              if (Game.inventory.chosen !== null && lmd[mc.map].containers[Game.container.id].length < MAX_INVENTORY_SIZE){
+              if (Game.inventory.chosen !== null && mc.inventory.length > 0 && lmd[mc.map].containers[Game.container.id].length < MAX_INVENTORY_SIZE){
                 lmd[mc.map].containers[Game.container.id].push(mc.inventory[Game.inventory.chosen]);
                 mc.inventory.splice(Game.inventory.chosen, 1);
-              }else if (Game.container.chosen !== null && mc.inventory.length < MAX_INVENTORY_SIZE){
+              }else if (Game.container.chosen !== null && mc.inventory.length < MAX_INVENTORY_SIZE && lmd[mc.map].containers[Game.container.id].length > 0){
                 mc.inventory.push(lmd[mc.map].containers[Game.container.id][Game.container.chosen]);
                 lmd[mc.map].containers[Game.container.id].splice(Game.container.chosen, 1);
               }
@@ -303,6 +303,12 @@ var Events = (function(){
   self.get_amount = function(action, min, max){
     return Math.min(max,Math.max(min, lmd[mc.map].items[Game.text.door_id][action]));
   };
+
+  self.container = function(){
+    if (mc.inventory.length === 0) Game.inventory.chosen = null;
+    if (lmd[mc.map].containers[Game.container.id].length === 0) Game.container.chosen = null;
+    Effects.container();
+  }
 
   return self;
 }());

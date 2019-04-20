@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 18:33:36, 17-Apr-2019
+ * @Last modified time: 09:05:14, 20-Apr-2019
  */
 
 var Collision = (function(){
@@ -77,6 +77,7 @@ var Collision = (function(){
       if (check_in_dir(0, Number(key))){
         Game.curr_action_type = "container";
         Game.container.id = Number(key);
+        Game.container.chosen = null;
         Game.inventory.chosen = 0;
       }
     });
