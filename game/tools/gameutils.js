@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 09:19:15, 20-Apr-2019
+ * @Last modified time: 10:04:50, 20-Apr-2019
  */
 
 var Game = {
@@ -74,6 +74,7 @@ function test_keypress(){
                 break;
               case "c":
                 Game.inventory.chosen = 0;
+                Game.inventory.chosen_action = null;
                 Game.curr_action_type="inventory";
                 break;
               default:

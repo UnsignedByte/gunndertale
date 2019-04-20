@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 09:20:09, 20-Apr-2019
+ * @Last modified time: 10:20:46, 20-Apr-2019
  */
 
 //no more blurring! :)
@@ -31,6 +31,7 @@ function draw(){
       break;
     case "inventory":
       Window.render();
+      if (mc.inventory.length === 0) Game.inventory.chosen = null;
       Effects.inventory();
       break;
     case "container":
