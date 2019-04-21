@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 10:04:50, 20-Apr-2019
+ * @Last modified time: 10:58:31, 21-Apr-2019
  */
 
 var Game = {
@@ -309,6 +309,13 @@ var Events = (function(){
     if (mc.inventory.length === 0) Game.inventory.chosen = null;
     if (lmd[mc.map].containers[Game.container.id].length === 0) Game.container.chosen = null;
     Effects.container();
+  }
+
+  self.warp = function(secs=1){
+    mc.time+=secs;
+    mc.time%=86400;
+    Stats.calculate(secs);
+    Game.curr_action_type = "darken";
   }
 
   return self;

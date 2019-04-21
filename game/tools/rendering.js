@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 16:09:11, 17-Apr-2019
+ * @Last modified time: 11:10:26, 21-Apr-2019
  */
 
 var Window = (function(){
@@ -79,9 +79,11 @@ var Effects = (function(){
     Vars.darken.opacity+=Vars.darken.rate;
     if (Vars.darken.opacity>1.25){
       Vars.darken.rate*=-1;
-      Events.set_map(Game.cmde[0]);
-      mc.pos = [Game.cmde[1], Game.cmde[2]];
-      Game.cmde = null;
+      if (Game.cmde != null){
+        Events.set_map(Game.cmde[0]);
+        mc.pos = [Game.cmde[1], Game.cmde[2]];
+        Game.cmde = null;
+      }
     }else if (Vars.darken.opacity<0){
       Vars.darken.opacity = 0;
       Vars.darken.rate*=-1;
