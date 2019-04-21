@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 10:58:31, 21-Apr-2019
+ * @Last modified time: 11:18:19, 21-Apr-2019
  */
 
 var Game = {
@@ -311,11 +311,20 @@ var Events = (function(){
     Effects.container();
   }
 
-  self.warp = function(secs=1){
+  self.warp_calc = function(secs){
     mc.time+=secs;
     mc.time%=86400;
     Stats.calculate(secs);
+  }
+
+  self.warp = function(secs){
     Game.curr_action_type = "darken";
+    Game.cmde = [self.warp_calc,[secs]];
+  }
+
+  self.change_map = function(map,x,y){
+    Events.set_map(map);
+    mc.pos = [x, y];
   }
 
   return self;

@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 09:05:14, 20-Apr-2019
+ * @Last modified time: 11:18:55, 21-Apr-2019
  */
 
 var Collision = (function(){
@@ -66,7 +66,7 @@ var Collision = (function(){
     Object.keys(currmapdoors).forEach(key => {
       if (check_in_dir(MOV_SPEED, Number(key))){
         Game.curr_action_type = "darken";
-        Game.cmde = currmapdoors[key];
+        Game.cmde = [Events.change_map, currmapdoors[key]];
       }
     });
   };
