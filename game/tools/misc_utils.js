@@ -3,7 +3,7 @@
  * @Date:   22:39:11, 24-Nov-2018
  * @Filename: misc_utils.js
  * @Last modified by:   edl
- * @Last modified time: 18:24:33, 17-Apr-2019
+ * @Last modified time: 18:53:46, 25-Apr-2019
  */
 
 function array_sum(arr1, arr2){
@@ -38,6 +38,10 @@ function secs2time(s){
     h:Math.floor(s/(3600)).toString().padStart(2, '0'),
     m:(Math.floor(s/60)%60).toString().padStart(2, '0'),
     s:(s%60).toString().padStart(2, '0')};
+}
+
+function time2secs(h,m=0,s=0){
+  return h*60*60+m*60+s;
 }
 
 function loop_add(a, b, mod){

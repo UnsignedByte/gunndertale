@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 11:15:52, 21-Apr-2019
+ * @Last modified time: 19:13:45, 25-Apr-2019
  */
 
 var Window = (function(){
@@ -36,6 +36,7 @@ var Window = (function(){
     drawImage(MAP_DATA[mc.map].front, [0, 0]);
     Effects.displaytime();
     Effects.happiness();
+    Effects.timeOverlay();
   }
 
   return self;
@@ -72,6 +73,14 @@ var Effects = (function(){
         width:108*Window.zoom,
         border_thicc:3*Window.zoom
       }
+    },
+    timeOverlay:{
+      max_blue:"rgb(0,51,153)",
+      reach_max:time2secs(20,30),
+      leave_max:time2secs(5,30),
+      start_night:time2secs(10),
+      end_night:time2secs(7),
+      max_opacity:0.5
     }
   };
 
@@ -88,10 +97,25 @@ var Effects = (function(){
       Vars.darken.rate*=-1;
       Game.curr_action_type="game";
     }
-    context.fillStyle="rgba(0, 0, 0, "+Vars.darken.opacity+")"
+    context.fillStyle=`rgba(0, 0, 0, ${Vars.darken.opacity})`;
     context.fillRect(0, 0, canv.width, canv.height);
     // context.stroke();
   };
+
+  self.timeOverlay = function(){ //Blueish for nighttime
+    context.fillStyle=Vars.timeOverlay.max_blue;
+    if(mc.time >= Vars.timeOverlay.reach_max || mc.time <= Vars.timeOverlay.leave_max){
+      context.globalAlpha = Vars.timeOverlay.max_opacity;
+    }else if (mc.time > Vars.timeOverlay.start_night){
+      context.globalAlpha = (mc.time-Vars.timeOverlay.start_night)/(Vars.timeOverlay.reach_max-Vars.timeOverlay.start_night)*Vars.timeOverlay.max_opacity;
+    }else if (mc.time < Vars.timeOverlay.end_night){
+      context.globalAlpha = (Vars.timeOverlay.end_night-mc.time)/(Vars.timeOverlay.end_night-Vars.timeOverlay.leave_max)*Vars.timeOverlay.max_opacity;
+    }else{
+      return;
+    }
+    context.fillRect(0, 0, canv.width, canv.height);
+    context.globalAlpha = 1;
+  }
 
   function fill_text(str, x,  y, width=null, size=Vars.text.font_size){
     context.font = size.toString()+"px VT323";

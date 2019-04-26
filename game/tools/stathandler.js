@@ -3,7 +3,7 @@
  * @Date:   23:01:22, 06-Mar-2019
  * @Filename: stathandler.js
  * @Last modified by:   edl
- * @Last modified time: 11:10:54, 21-Apr-2019
+ * @Last modified time: 18:19:12, 25-Apr-2019
  */
 
 
@@ -43,7 +43,7 @@
 
    self.add_subsubcategory = function(category, subcategory, name, vals){
      if (mc.stats[category][subcategory][name] === undefined) mc.stats[category][subcategory][name] = vals;
-     else mc.stats[category][subcategory][name].val+=+vals.val;
+     else mc.stats[category][subcategory][name].val+=vals.val;
    };
 
    return self;
