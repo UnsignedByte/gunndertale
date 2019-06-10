@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 11:18:19, 21-Apr-2019
+ * @Last modified time: 22:46:11, 04-Jun-2019
  */
 
 var Game = {
@@ -323,6 +323,9 @@ var Events = (function(){
   }
 
   self.change_map = function(map,x,y){
+    if(mc.map === "minimap"){
+      mc.time += MATH_DATA["minimap"].SIZE_RATIO*(Math.random/10+1.1)*(Math.abs(mc.minimap_startpos[0]-mc.pos[0])+Math.abs(mc.minimap_startpos[1]-mc.pos[1]));
+    }
     Events.set_map(map);
     mc.pos = [x, y];
   }

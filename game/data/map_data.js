@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 18:33:19, 17-Apr-2019
+ * @Last modified time: 22:45:06, 04-Jun-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -45,6 +45,13 @@ var DEFAULT_LOCAL_MAP_DATA = {
 };
 
 var MAP_DATA = {
+  "minimap":{
+    doors: {
+
+    },
+    actions:{},
+    SIZE_RATIO:10
+  },
   "secret": {
     doors: {
       0xffff00: ["house", 119, 455]
