@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 22:45:06, 04-Jun-2019
+ * @Last modified time: 23:31:43, 13-Jun-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -192,23 +192,3 @@ var MAP_DATA = {
     }
   }
 };
-
-
-(()=>{
-  let count = Object.keys(MAP_DATA).length*3;
-
-  Object.keys(MAP_DATA).forEach(key => {
-    let types = ["back", "front", "map"]
-    for (let i = 0; i < types.length; i++){
-      let img = new Image();
-      img.src = `../images/map/${key}/${key}-${types[i]}.png`;
-      img.onload = function() {
-        MAP_DATA[key][types[i]] = img;
-        count--;
-        if(count === 0){
-          Events.set_map(mc.map);
-        }
-      }
-    }
-  });
-})();

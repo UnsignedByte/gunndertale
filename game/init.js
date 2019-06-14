@@ -3,10 +3,8 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 11:57:40, 21-Apr-2019
+ * @Last modified time: 23:48:31, 13-Jun-2019
  */
-
-
 
 
 //Init
@@ -28,6 +26,108 @@ if (localStorage.getItem("mainchar") === null || localStorage.getItem("lmd") ===
   mc = JSON.parse(window.localStorage.getItem("mainchar"));
   lmd = JSON.parse(window.localStorage.getItem("lmd"));
 }
+
+
+var Game = {
+  game_anim_dir_mod:0,
+  curr_collision_data:[false, false, false, false],
+  curr_action_type:"game",
+  map:{
+    front:null,
+    back:null,
+    map:null,
+    objmap:null
+  },
+  curr_obj:null,
+  cmde:null,
+  text:{
+    door_id:null,
+    pos:null,
+    full:null,
+    options:null,
+    chosen:null,
+    chosenKey:null
+  },
+  inventory:{
+    chosen:null,
+    chosen_action:null
+  },
+  container:{
+    id:null,
+    chosen:null
+  },
+  stats:{
+    happiness:100,
+    cqueue:[]
+  }
+};
+
+(()=>{
+  let count = 1;
+
+  Object.keys(MAP_DATA).forEach(key => {
+    let types = ["back", "front", "map"]
+    for (let i = 0; i < types.length; i++){
+      let img = new Image();
+      count++;
+      img.src = `../images/map/${key}/${key}-${types[i]}.png`;
+      img.onload = function() {
+        MAP_DATA[key][types[i]] = img;
+        count--;
+        if(count === 0){
+          Events.set_map(mc.map);
+        }
+      }
+    }
+  });
+
+  let directions = ["front", "back", "left", "right"];
+  for (let i = 0; i < MC_DATA.animations.length; i++){
+    for (let j = 0; j < MC_DATA.animations[i].length; j++){
+      let img = new Image();
+      count++;
+      img.src = "../images/objects/mc/"+directions[i]+"/"+MC_DATA.animations[i][j];
+      img.onload = function() {
+        MC_DATA.animations[i][j] = img;
+        count--;
+        if(count === 0){
+          Events.set_map(mc.map);
+        }
+      }
+    }
+  }
+
+  //load cursor
+  let img = new Image();
+  count++;
+  img.src = "../images/objects/mc/cursor.png";
+  img.onload = function(){
+    MC_DATA.cursor = img;
+    count--;
+    if(count === 0){
+      Events.set_map(mc.map);
+    }
+  }
+
+  //load objects
+  Object.keys(OBJ_DATA).forEach(key => {
+    OBJ_DATA[key].frames = [];
+    for (let i = 0; i < OBJ_DATA[key].framecount; i++){
+      let img = new Image();
+      count++;
+      img.src = `../images/objects/${key}/${i}.png`;
+      img.onload = function() {
+        OBJ_DATA[key].frames[i] = img;
+        count--;
+        if(count === 0){
+          Events.set_map(mc.map);
+        }
+      }
+    }
+  });
+
+  count--;
+})();
 
 var canv = document.getElementById('game');
 
