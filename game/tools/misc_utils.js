@@ -3,7 +3,7 @@
  * @Date:   22:39:11, 24-Nov-2018
  * @Filename: misc_utils.js
  * @Last modified by:   edl
- * @Last modified time: 18:53:46, 25-Apr-2019
+ * @Last modified time: 14:47:19, 17-Jun-2019
  */
 
 function array_sum(arr1, arr2){
@@ -53,4 +53,15 @@ function loop_add(a, b, mod){
 
 function minmax(a, min, max){
   return Math.min(max, Math.max(a, min));
+}
+
+function set_defaults(dict, keys, defaults){
+  Object.keys(dict).forEach((key) => {
+    for(let i = 0; i < keys.length; i++){
+      if (dict[key][keys[i]] === undefined){
+        console.log(keys[i]);
+        dict[key][keys[i]] = defaults[i];
+      }
+    }
+  });
 }

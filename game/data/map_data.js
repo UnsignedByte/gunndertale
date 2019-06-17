@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 01:06:16, 16-Jun-2019
+ * @Last modified time: 14:44:27, 17-Jun-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -46,9 +46,7 @@ var DEFAULT_LOCAL_MAP_DATA = {
 
 var MAP_DATA = {
   "minimap":{
-    doors: {
-
-    },
+    doors: {},
     actions:{},
     SIZE_RATIO:10
   },
@@ -73,6 +71,8 @@ var MAP_DATA = {
     objects:[
       {
         type:"checkpoint",
+        pos:[150, 455],
+        frame:0,
         vars:[150, 455]
       }
     ],

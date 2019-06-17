@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 19:13:45, 25-Apr-2019
+ * @Last modified time: 14:37:17, 17-Jun-2019
  */
 
 var Window = (function(){
@@ -29,11 +29,20 @@ var Window = (function(){
     context.drawImage(im, (w_p[0]+x)*self.zoom, (w_p[1]+y)*self.zoom, im.width*self.zoom, im.height*self.zoom);
   }
 
+  function renderObjects(){
+    for(let i = 0; i < MAP_DATA[mc.map].objects.length; i++){
+      drawImage(OBJ_DATA[MAP_DATA[mc.map].objects[i].type].frames[MAP_DATA[mc.map].objects[i].frame], MAP_DATA[mc.map].objects[i].pos);
+      MAP_DATA[mc.map].objects[i].frame++;
+      MAP_DATA[mc.map].objects[i].frame%=OBJ_DATA[MAP_DATA[mc.map].objects[i].type].framecount;
+    }
+  }
+
   self.render = function(){
     let win_pos = get_window_pos();
     drawImage(MAP_DATA[mc.map].back, [0, 0]);
     drawImage(mc.currAnim, mc.pos);
     drawImage(MAP_DATA[mc.map].front, [0, 0]);
+    renderObjects();
     Effects.displaytime();
     Effects.happiness();
     Effects.timeOverlay();

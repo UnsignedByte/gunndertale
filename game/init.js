@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 23:48:31, 13-Jun-2019
+ * @Last modified time: 14:44:58, 17-Jun-2019
  */
 
 
@@ -65,6 +65,7 @@ var Game = {
 (()=>{
   let count = 1;
 
+  set_defaults(MAP_DATA, ["actions", "objects", "doors"], [{}, [], {}]);
   Object.keys(MAP_DATA).forEach(key => {
     let types = ["back", "front", "map"]
     for (let i = 0; i < types.length; i++){

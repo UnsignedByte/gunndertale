@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 22:41:05, 04-Jun-2019
+ * @Last modified time: 14:31:56, 17-Jun-2019
  */
 
 //no more blurring! :)
@@ -12,7 +12,6 @@ context.imageSmoothingEnabled = false;
 function draw(){
   context.clearRect(0, 0, canv.width, canv.height)
   test_keypress();
-  // mc.inventory = mc.inventory.filter((el) => {return el!=null;});
   switch (Game.curr_action_type){
     case "game":
       mc.currAnim=MC_DATA.animations[mc.dir[0]][mc.dir[1]];
