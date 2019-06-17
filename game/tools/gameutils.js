@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 23:15:45, 13-Jun-2019
+ * @Last modified time: 01:04:27, 16-Jun-2019
  */
 
 function test_keypress(){
@@ -193,7 +193,7 @@ var ActionList = (function(){
         Game.text.pos.push(pos+1);
         for(let i = 0; i < lastm[pos][1].length; i++){
           if (typeof lastm[pos][1][i] === 'string' && lastm[pos][1][i].startsWith("var_") && Game.curr_obj !== null){
-            lastm[pos][1][i] = MAP_DATA[mc.map].objects[Game.curr_obj][parseInt(lastm[pos][1][i].slice(4))];
+            lastm[pos][1][i] = MAP_DATA[mc.map].objects[Game.curr_obj].vars[parseInt(lastm[pos][1][i].slice(4))];
           }
         }
         Game.text.pos.push(lastm[pos][0](...lastm[pos][1]));

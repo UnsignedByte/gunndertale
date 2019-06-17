@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 23:31:43, 13-Jun-2019
+ * @Last modified time: 01:06:16, 16-Jun-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -70,6 +70,12 @@ var MAP_DATA = {
       0xff0000: ["livingroom", 39, 271],
       0xffff00: ["secret", 135, 175]
     },
+    objects:[
+      {
+        type:"checkpoint",
+        vars:[150, 455]
+      }
+    ],
     actions:{}
   },
   "livingroom": {
