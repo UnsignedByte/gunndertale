@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 18:57:35, 18-Jun-2019
+ * @Last modified time: 22:34:23, 18-Jun-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -69,9 +69,9 @@ var MAP_DATA = {
     objects:[
       {
         type:"checkpoint",
-        pos:[150, 455],
+        pos:[150, 480],
         frame:0,
-        vars:[150, 455]
+        vars:[150, 480]
       }
     ]
   },

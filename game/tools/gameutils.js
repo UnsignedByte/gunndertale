@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 01:04:27, 16-Jun-2019
+ * @Last modified time: 22:45:26, 18-Jun-2019
  */
 
 function test_keypress(){
@@ -39,6 +39,7 @@ function test_keypress(){
               case "z":
                 Collision.check_actions();
                 Collision.check_containers();
+                Collision.check_objects();
                 break;
               case "c":
                 Game.inventory.chosen = 0;
