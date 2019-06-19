@@ -3,7 +3,7 @@
  * @Date:   21:45:28, 24-Nov-2018
  * @Filename: game.css
  * @Last modified by:   edl
- * @Last modified time: 10:52:57, 22-Feb-2019
+ * @Last modified time: 19:36:09, 18-Jun-2019
  */
 html {
 	height: 100%;
@@ -16,6 +16,9 @@ body {
 	overflow:hidden;
 }
 
+#debug {
+	display:none;
+}
 
 #game {
   /*Set scale to resize, this will result in better resolution*/

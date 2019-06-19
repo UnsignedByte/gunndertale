@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 14:44:58, 17-Jun-2019
+ * @Last modified time: 19:29:56, 18-Jun-2019
  */
 
 
@@ -123,6 +123,16 @@ var Game = {
         if(count === 0){
           Events.set_map(mc.map);
         }
+      }
+    }
+    let img = new Image();
+    count++;
+    img.src = `../images/objects/${key}/hitbox.png`;
+    img.onload = function() {
+      OBJ_DATA[key].hitbox = img;
+      count--;
+      if(count === 0){
+        Events.set_map(mc.map);
       }
     }
   });
