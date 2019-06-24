@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 12:46:41, 24-Jun-2019
+ * @Last modified time: 13:52:54, 24-Jun-2019
  */
 
 function test_keypress(){
@@ -176,6 +176,7 @@ var ActionList = (function(){
 
   self.get_pos = function(pos=Game.text.pos, l=Game.text.full){
     for(let i = 0; i < pos.length; i++){
+      if (l === undefined) return null;
       l = l[pos[i]];
     }
     return l;
@@ -183,8 +184,10 @@ var ActionList = (function(){
 
   function parse_currpos(lastm, pos){
     Game.text.options = null;
+    console.log(lastm, pos);
     if (lastm.length === pos){
       Game.curr_action_type="game";
+      Game.curr_obj = null;
       return null;
     }
     if(typeof lastm[pos]=== 'string'){
@@ -193,10 +196,13 @@ var ActionList = (function(){
         Game.text.pos.pop()
         Game.text.pos.push(pos+1);
         for(let i = 0; i < lastm[pos][1].length; i++){
+          console.log(lastm[pos][1][i]);
           if (typeof lastm[pos][1][i] === 'string' && lastm[pos][1][i].startsWith("var_") && Game.curr_obj !== null){
-            lastm[pos][1][i] = MAP_DATA[mc.map].objects[Game.curr_obj].vars[parseInt(lastm[pos][1][i].slice(4))];
+            console.log(lastm[pos][1][i]);
+            lastm[pos][1][i] = Game.curr_obj.vars[parseInt(lastm[pos][1][i].slice(4))];
           }
         }
+        console.log(lastm[pos][1]);
         Game.text.pos.push(lastm[pos][0](...lastm[pos][1]));
         Game.text.pos.push(0);
       }else{
@@ -206,6 +212,11 @@ var ActionList = (function(){
     }else if (lastm[pos].constructor == Object){ //Is dictionary
       Game.text.options = lastm[pos];
       Game.text.chosen = 0;
+    }
+    if (self.get_pos() === null) {
+      Game.curr_action_type="game";
+      Game.curr_obj = null;
+      return null;
     }
   }
 

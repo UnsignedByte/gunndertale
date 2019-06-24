@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 12:42:25, 24-Jun-2019
+ * @Last modified time: 13:30:17, 24-Jun-2019
  */
 
 var Collision = (function(){
@@ -31,8 +31,8 @@ var Collision = (function(){
   }
 
   function get_col_at_pix(x, y, map){
-   let m_data = map.getContext('2d').getImageData(x, y, 1, 1).data;
-   return rgbHex(m_data[0], m_data[1], m_data[2]);
+    let m_data = map.getContext('2d').getImageData(x, y, 1, 1).data;
+    return rgbHex(m_data[0], m_data[1], m_data[2]);
   }
 
   function c_c(sx, sy, lx, ly, match_col=0, cond="===", map=Game.map.map){
@@ -87,6 +87,7 @@ var Collision = (function(){
     let currobjs = MAP_DATA[mc.map].objects;
     for(let i = 0; i < currobjs.length; i++){
       if (check_in_dir(1, i, undefined, undefined, Game.map.objmap)){
+        Game.curr_obj = currobjs[i];
         Events.initText(OBJ_DATA[currobjs[i].type].responses);
       }
     }

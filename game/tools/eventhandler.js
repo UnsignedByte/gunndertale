@@ -3,7 +3,7 @@
  * @Date:   13:14:43, 10-Jun-2019
  * @Filename: eventhandler.js
  * @Last modified by:   edl
- * @Last modified time: 21:05:42, 18-Jun-2019
+ * @Last modified time: 13:34:34, 24-Jun-2019
  */
 
 var Events = (function(){
@@ -108,6 +108,7 @@ var Events = (function(){
     }
     Events.set_map(map);
     mc.pos = [x, y];
+    return 0;
   }
 
   return self;
