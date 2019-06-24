@@ -3,7 +3,7 @@
  * @Date:   16:38:05, 01-Dec-2018
  * @Filename: gameutils.js
  * @Last modified by:   edl
- * @Last modified time: 22:45:26, 18-Jun-2019
+ * @Last modified time: 12:46:41, 24-Jun-2019
  */
 
 function test_keypress(){
@@ -20,16 +20,16 @@ function test_keypress(){
               is_moving=true;
               switch (pkey){
                 case "left":
-                  mc.pos[0]-=MOV_SPEED;
+                  mc.pos[0]-=1;
                   break;
                 case "up":
-                  mc.pos[1]-=MOV_SPEED;
+                  mc.pos[1]-=1;
                   break;
                 case "right":
-                  mc.pos[0]+=MOV_SPEED;
+                  mc.pos[0]+=1;
                   break;
                 case "down":
-                  mc.pos[1]+=MOV_SPEED;
+                  mc.pos[1]+=1;
                   break;
               }
             }
@@ -165,7 +165,7 @@ function test_keypress(){
   }
   if(is_moving){
     Game.game_anim_dir_mod++;
-    Game.game_anim_dir_mod%=FRAMES_BEFORE_WALK;
+    Game.game_anim_dir_mod%=10;
   }else{
     Game.game_anim_dir_mod=0;
   }

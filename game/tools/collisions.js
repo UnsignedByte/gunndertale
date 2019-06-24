@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 22:46:47, 18-Jun-2019
+ * @Last modified time: 12:42:25, 24-Jun-2019
  */
 
 var Collision = (function(){
@@ -47,16 +47,16 @@ var Collision = (function(){
   }
 
   self.check_collide = function(){
-   return [check_in_dir(MOV_SPEED, 0, 0) || check_in_dir(MOV_SPEED, 0xffffff, 0, "!==", Game.map.objmap),
-           check_in_dir(MOV_SPEED, 0, 1) || check_in_dir(MOV_SPEED, 0xffffff, 1, "!==", Game.map.objmap),
-           check_in_dir(MOV_SPEED, 0, 2) || check_in_dir(MOV_SPEED, 0xffffff, 2, "!==", Game.map.objmap),
-           check_in_dir(MOV_SPEED, 0, 3) || check_in_dir(MOV_SPEED, 0xffffff, 3, "!==", Game.map.objmap)]
+   return [check_in_dir(1, 0, 0) || check_in_dir(1, 0xffffff, 0, "!==", Game.map.objmap),
+           check_in_dir(1, 0, 1) || check_in_dir(1, 0xffffff, 1, "!==", Game.map.objmap),
+           check_in_dir(1, 0, 2) || check_in_dir(1, 0xffffff, 2, "!==", Game.map.objmap),
+           check_in_dir(1, 0, 3) || check_in_dir(1, 0xffffff, 3, "!==", Game.map.objmap)]
   };
 
   self.check_doors = function(){
     let currmapdoors = MAP_DATA[mc.map].doors;
     Object.keys(currmapdoors).forEach(key => {
-      if (check_in_dir(MOV_SPEED, Number(key))){
+      if (check_in_dir(1, Number(key))){
         Game.curr_action_type = "darken";
         Game.cmde = [Events.change_map, currmapdoors[key]];
       }
@@ -86,7 +86,7 @@ var Collision = (function(){
   self.check_objects = function(){
     let currobjs = MAP_DATA[mc.map].objects;
     for(let i = 0; i < currobjs.length; i++){
-      if (check_in_dir(MOV_SPEED, i, undefined, undefined, Game.map.objmap)){
+      if (check_in_dir(1, i, undefined, undefined, Game.map.objmap)){
         Events.initText(OBJ_DATA[currobjs[i].type].responses);
       }
     }

@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 19:29:56, 18-Jun-2019
+ * @Last modified time: 12:49:01, 24-Jun-2019
  */
 
 
@@ -192,8 +192,7 @@ const SWITCH_DIRS = [2, 1, 3, 0];
 //Constants
 
 const BASE_FPS = 60;
-const MOV_SPEED = 1;
-const FRAMES_BEFORE_WALK = 10;
+const TPS = 80;
 
 init();
 
