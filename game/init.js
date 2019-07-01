@@ -3,7 +3,7 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 12:49:01, 24-Jun-2019
+ * @Last modified time: 17:49:21, 25-Jun-2019
  */
 
 
@@ -189,15 +189,12 @@ var KEY_NAMES = {
 
 const SWITCH_DIRS = [2, 1, 3, 0];
 
-//Constants
-
 const BASE_FPS = 60;
 const TPS = 80;
 
 init();
 
 function init(){
-  /*Double size cuz stupid bug lol*/
   canv.width = window.innerWidth * 2;
   canv.height = window.innerHeight * 2;
 }
