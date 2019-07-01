@@ -3,7 +3,7 @@
  * @Date:   21:45:28, 24-Nov-2018
  * @Filename: game.css
  * @Last modified by:   edl
- * @Last modified time: 12:39:34, 11-Dec-2018
+ * @Last modified time: 19:36:09, 18-Jun-2019
  */
 html {
 	height: 100%;
@@ -13,11 +13,15 @@ html {
 body {
   height: 100%;
   margin: 0;
+	overflow:hidden;
 }
 
+#debug {
+	display:none;
+}
 
 #game {
-    /*Set scale to resize, this will result in better resolution*/
-    transform: scale(0.5) translate(-50%, -50%);
-    position: fixed;
+  /*Set scale to resize, this will result in better resolution*/
+  transform: scale(0.5) translate(-50%, -50%);
+  position: fixed;
 }

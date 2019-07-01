@@ -3,7 +3,7 @@
  * @Date:   22:39:11, 24-Nov-2018
  * @Filename: misc_utils.js
  * @Last modified by:   edl
- * @Last modified time: 00:05:00, 15-Dec-2018
+ * @Last modified time: 19:20:46, 18-Jun-2019
  */
 
 function array_sum(arr1, arr2){
@@ -30,4 +30,37 @@ function randChoice(l){
 
 function randInt(a, b){
   return a+Math.floor(Math.random()*b);
+}
+
+function secs2time(s){
+  s%=86400;
+  return {
+    h:Math.floor(s/(3600)).toString().padStart(2, '0'),
+    m:(Math.floor(s/60)%60).toString().padStart(2, '0'),
+    s:(s%60).toString().padStart(2, '0')};
+}
+
+function time2secs(h,m=0,s=0){
+  return h*60*60+m*60+s;
+}
+
+function loop_add(a, b, mod){
+  if(a != null){
+    return (a+b+mod)%mod
+  }
+  return null;
+}
+
+function minmax(a, min, max){
+  return Math.min(max, Math.max(a, min));
+}
+
+function set_defaults(dict, keys, defaults){
+  Object.keys(dict).forEach((key) => {
+    for(let i = 0; i < keys.length; i++){
+      if (dict[key][keys[i]] === undefined){
+        dict[key][keys[i]] = defaults[i];
+      }
+    }
+  });
 }
