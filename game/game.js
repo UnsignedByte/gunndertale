@@ -3,21 +3,26 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 12:48:12, 24-Jun-2019
+ * @Last modified time: 21:49:43, 14-Aug-2019
  */
 
 //no more blurring! :)
 context.imageSmoothingEnabled = false;
 
 function tick(){
+  var ttime = Date.now();
   test_keypress();
   if (Game.curr_action_type === "game"){
     Game.curr_collision_data = Collision.check_collide();
+    console.log("Collide", Date.now()-ttime);
     Collision.check_doors();
+    console.log("Doors took", Date.now()-ttime);
   }
+  console.log("Tick took", Date.now()-ttime);
 }
 
 function draw(){
+  // console.log("Frame Start");
   context.clearRect(0, 0, canv.width, canv.height)
   mc.currAnim=MC_DATA.animations[mc.dir[0]][mc.dir[1]];
   Window.render();
@@ -37,6 +42,7 @@ function draw(){
       break;
     default:
   }
+  // console.log("Frame End");
 }
 
 function second(){

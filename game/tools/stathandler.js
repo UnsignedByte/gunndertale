@@ -3,9 +3,8 @@
  * @Date:   23:01:22, 06-Mar-2019
  * @Filename: stathandler.js
  * @Last modified by:   edl
- * @Last modified time: 14:32:45, 12-Jul-2019
+ * @Last modified time: 13:15:47, 18-Jul-2019
  */
-
 
  var Stats = (function(){
    var self = {};
@@ -39,6 +38,7 @@
      Object.keys(mc.stats.happiness).forEach(key => {
        Game.stats.happiness+=calc_subcategory("happiness",key, secs);
      });
+     Game.stats.grade = 100*(0.8*mc.stats.grades.test/mc.stats.grades.tot_test + 0.2*mc.stats.grades.hw/mc.stats.grades.tot_hw);
    };
 
    self.add_subsubcategory = function(category, subcategory, name, vals){

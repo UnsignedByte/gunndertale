@@ -3,7 +3,7 @@
  * @Date:   18:22:30, 25-Nov-2018
  * @Filename: mc_data.js
  * @Last modified by:   edl
- * @Last modified time: 23:33:31, 13-Jun-2019
+ * @Last modified time: 13:17:03, 18-Jul-2019
  */
 
 var MAX_INVENTORY_SIZE = 16;
@@ -34,6 +34,12 @@ var DEFAULT_MC = {
           dt:0     //how often to lower happiness (0 = infinity)
         }
       }
+    },
+    grades:{
+      test:0,
+      hw:0,
+      tot_test:0,
+      tot_hw:0
     }
   }
 };
