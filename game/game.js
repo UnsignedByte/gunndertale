@@ -3,7 +3,7 @@
  * @Date:   21:16:29, 24-Nov-2018
  * @Filename: main.js
  * @Last modified by:   edl
- * @Last modified time: 21:49:43, 14-Aug-2019
+ * @Last modified time: 22:21:59, 14-Aug-2019
  */
 
 //no more blurring! :)
@@ -14,9 +14,7 @@ function tick(){
   test_keypress();
   if (Game.curr_action_type === "game"){
     Game.curr_collision_data = Collision.check_collide();
-    console.log("Collide", Date.now()-ttime);
     Collision.check_doors();
-    console.log("Doors took", Date.now()-ttime);
   }
   console.log("Tick took", Date.now()-ttime);
 }
