@@ -3,7 +3,7 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 22:19:58, 14-Aug-2019
+ * @Last modified time: 22:41:34, 16-Aug-2019
  */
 
 var Collision = (function(){
@@ -12,10 +12,13 @@ var Collision = (function(){
   var rects = {
     re:null,
     ore:null,
-    zdr:null
+    zdr:null,
+    mdst:1,
+    mapdat:null,
+    objmapdat:null
   }
 
-  function get_footrect(dst, map=Game.map.map){
+  function get_footrect(dst, map="map"){
     let r = [];
     r.push(get_dir(dst,0,map));
     r.push(get_dir(dst,1,map));
@@ -24,22 +27,22 @@ var Collision = (function(){
     return r
   }
 
-  function get_dir(dst, dir=SWITCH_DIRS.indexOf(mc.dir[0]), map=Game.map.map){
+  function get_dir(dst, dir=SWITCH_DIRS.indexOf(mc.dir[0]), map="map"){
     switch (dir){
       case 0:
-        return c_c(mc.pos[0]-dst, mc.pos[1]+mc.currAnim.height, 0, 0, map);
+        return c_c(rects.mdst-dst, rects.mdst+mc.currAnim.height-1, 1, 1, map);
         //front
         break;
       case 1:
-        return c_c(mc.pos[0], mc.pos[1]-dst+mc.currAnim.height, mc.currAnim.width, 0, map);
+        return c_c(rects.mdst, rects.mdst-dst+mc.currAnim.height-1, mc.currAnim.width, 1, map);
         //back
         break;
       case 2:
-        return c_c(mc.pos[0]+mc.currAnim.width+dst, mc.pos[1]+mc.currAnim.height, 0, 0, map);
+        return c_c(rects.mdst+mc.currAnim.width+dst-1, rects.mdst+mc.currAnim.height-1, 1, 1, map);
         //left
         break;
       case 3:
-        return c_c(mc.pos[0], mc.pos[1]+dst+mc.currAnim.height, mc.currAnim.width, 0, map);
+        return c_c(rects.mdst, rects.mdst+dst+mc.currAnim.height-1, mc.currAnim.width, 1, map);
         //right
         break;
       default:
@@ -47,29 +50,38 @@ var Collision = (function(){
     }
   }
 
-  function get_col_at_pix(x, y, map){
-    let m_data = map.getContext('2d').getImageData(x, y, 1, 1).data;
-    return rgbHex(m_data[0], m_data[1], m_data[2]);
+  function get_col_at_pix(i, map){
+    return rgbHex(rects[`${map}dat`][i], rects[`${map}dat`][i+1], rects[`${map}dat`][i+2]);
   }
 
-  function c_c(sx, sy, lx, ly, map=Game.map.map){
+  function c_c(sx, sy, lx, ly, map){
     let ret = [];
-    for(let j = 0; j <= lx; j++){
-      for(let i = 0; i <= ly; i++){
-        ret.push(get_col_at_pix(sx+j, sy+i, map));
+    for(let j = 0; j < lx; j++){
+      for(let i = 0; i < ly; i++){
+        ret.push(get_col_at_pix(4*((mc.currAnim.width+2*rects.mdst)*(sy+i-1)+sx+j), map));
       }
     }
     return ret;
   }
 
   self.check_collide = function(){
+    rects.mapdat = Game.map.map.getContext('2d').getImageData(
+                      mc.pos[0]- rects.mdst,
+                      mc.pos[1]-rects.mdst,
+                      mc.currAnim.width + 2*rects.mdst,
+                      mc.currAnim.height+ 2*rects.mdst).data;
+    rects.objmapdat = Game.map.objmap.getContext('2d').getImageData(
+                      mc.pos[0]- rects.mdst,
+                      mc.pos[1]-rects.mdst,
+                      mc.currAnim.width + 2*rects.mdst,
+                      mc.currAnim.height+ 2*rects.mdst).data;
     rects.re = get_footrect(1);
-    rects.ore = get_footrect(1, Game.map.objmap);
+    rects.ore = get_footrect(1, "objmap");
     rects.zdr = get_dir(0);
     return [rects.re[0].includes(0) || !rects.ore[0].includes(0xffffff),
-            rects.re[1].includes(0) || !rects.ore[0].includes(0xffffff),
-            rects.re[2].includes(0) || !rects.ore[0].includes(0xffffff),
-            rects.re[3].includes(0) || !rects.ore[0].includes(0xffffff)]
+            rects.re[1].includes(0) || !rects.ore[1].includes(0xffffff),
+            rects.re[2].includes(0) || !rects.ore[2].includes(0xffffff),
+            rects.re[3].includes(0) || !rects.ore[3].includes(0xffffff)]
   };
 
   self.check_doors = function(){
