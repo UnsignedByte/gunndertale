@@ -3,60 +3,91 @@
  * @Date:   10:02:55, 27-Nov-2018
  * @Filename: collisions.js
  * @Last modified by:   edl
- * @Last modified time: 13:30:17, 24-Jun-2019
+ * @Last modified time: 22:41:34, 16-Aug-2019
  */
 
 var Collision = (function(){
   var self = {};
 
-  function check_in_dir(dst, match_col, dir=SWITCH_DIRS.indexOf(mc.dir[0]), cond="===", map=Game.map.map){
+  var rects = {
+    re:null,
+    ore:null,
+    zdr:null,
+    mdst:1,
+    mapdat:null,
+    objmapdat:null
+  }
+
+  function get_footrect(dst, map="map"){
+    let r = [];
+    r.push(get_dir(dst,0,map));
+    r.push(get_dir(dst,1,map));
+    r.push(get_dir(dst,2,map));
+    r.push(get_dir(dst,3,map));
+    return r
+  }
+
+  function get_dir(dst, dir=SWITCH_DIRS.indexOf(mc.dir[0]), map="map"){
     switch (dir){
       case 0:
-        return c_c(mc.pos[0]-dst, mc.pos[1]+mc.currAnim.height, 0, 0, match_col, cond, map);
+        return c_c(rects.mdst-dst, rects.mdst+mc.currAnim.height-1, 1, 1, map);
         //front
         break;
       case 1:
-        return c_c(mc.pos[0], mc.pos[1]-dst+mc.currAnim.height, mc.currAnim.width, 0, match_col, cond, map);
+        return c_c(rects.mdst, rects.mdst-dst+mc.currAnim.height-1, mc.currAnim.width, 1, map);
         //back
         break;
       case 2:
-        return c_c(mc.pos[0]+mc.currAnim.width+dst, mc.pos[1]+mc.currAnim.height, 0, 0, match_col, cond, map);
+        return c_c(rects.mdst+mc.currAnim.width+dst-1, rects.mdst+mc.currAnim.height-1, 1, 1, map);
         //left
         break;
       case 3:
-        return c_c(mc.pos[0], mc.pos[1]+dst+mc.currAnim.height, mc.currAnim.width, 0, match_col, cond, map);
+        return c_c(rects.mdst, rects.mdst+dst+mc.currAnim.height-1, mc.currAnim.width, 1, map);
         //right
         break;
+      default:
+        return;
     }
   }
 
-  function get_col_at_pix(x, y, map){
-    let m_data = map.getContext('2d').getImageData(x, y, 1, 1).data;
-    return rgbHex(m_data[0], m_data[1], m_data[2]);
+  function get_col_at_pix(i, map){
+    return rgbHex(rects[`${map}dat`][i], rects[`${map}dat`][i+1], rects[`${map}dat`][i+2]);
   }
 
-  function c_c(sx, sy, lx, ly, match_col=0, cond="===", map=Game.map.map){
-    for(let j = 0; j <= lx; j++){
-      for(let i = 0; i <= ly; i++){
-        if (eval(`get_col_at_pix(sx+j, sy+i, map) ${cond} match_col`)){
-          return true;
-        }
+  function c_c(sx, sy, lx, ly, map){
+    let ret = [];
+    for(let j = 0; j < lx; j++){
+      for(let i = 0; i < ly; i++){
+        ret.push(get_col_at_pix(4*((mc.currAnim.width+2*rects.mdst)*(sy+i-1)+sx+j), map));
       }
     }
-    return false;
+    return ret;
   }
 
   self.check_collide = function(){
-   return [check_in_dir(1, 0, 0) || check_in_dir(1, 0xffffff, 0, "!==", Game.map.objmap),
-           check_in_dir(1, 0, 1) || check_in_dir(1, 0xffffff, 1, "!==", Game.map.objmap),
-           check_in_dir(1, 0, 2) || check_in_dir(1, 0xffffff, 2, "!==", Game.map.objmap),
-           check_in_dir(1, 0, 3) || check_in_dir(1, 0xffffff, 3, "!==", Game.map.objmap)]
+    rects.mapdat = Game.map.map.getContext('2d').getImageData(
+                      mc.pos[0]- rects.mdst,
+                      mc.pos[1]-rects.mdst,
+                      mc.currAnim.width + 2*rects.mdst,
+                      mc.currAnim.height+ 2*rects.mdst).data;
+    rects.objmapdat = Game.map.objmap.getContext('2d').getImageData(
+                      mc.pos[0]- rects.mdst,
+                      mc.pos[1]-rects.mdst,
+                      mc.currAnim.width + 2*rects.mdst,
+                      mc.currAnim.height+ 2*rects.mdst).data;
+    rects.re = get_footrect(1);
+    rects.ore = get_footrect(1, "objmap");
+    rects.zdr = get_dir(0);
+    return [rects.re[0].includes(0) || !rects.ore[0].includes(0xffffff),
+            rects.re[1].includes(0) || !rects.ore[1].includes(0xffffff),
+            rects.re[2].includes(0) || !rects.ore[2].includes(0xffffff),
+            rects.re[3].includes(0) || !rects.ore[3].includes(0xffffff)]
   };
 
   self.check_doors = function(){
     let currmapdoors = MAP_DATA[mc.map].doors;
     Object.keys(currmapdoors).forEach(key => {
-      if (check_in_dir(1, Number(key))){
+      if (rects.re[SWITCH_DIRS.indexOf(mc.dir[0])].includes(Number(key))){
         Game.curr_action_type = "darken";
         Game.cmde = [Events.change_map, currmapdoors[key]];
       }
@@ -66,7 +97,7 @@ var Collision = (function(){
   self.check_containers = function(){
     let currcontainers = lmd[mc.map].containers;
     Object.keys(currcontainers).forEach(key => {
-      if (check_in_dir(0, Number(key))){
+      if (rects.zdr.includes(Number(key))){
         Game.curr_action_type = "container";
         Game.container.id = Number(key);
         Game.container.chosen = null;
@@ -77,7 +108,7 @@ var Collision = (function(){
   self.check_actions = function(){
     let currmapacts = MAP_DATA[mc.map].actions;
     Object.keys(currmapacts).forEach(key => {
-      if (currmapacts[key].dir.indexOf(mc.dir[0]) >= 0  && check_in_dir(0, Number(key))){
+      if (currmapacts[key].dir.indexOf(mc.dir[0]) >= 0  && rects.zdr.includes(Number(key))){
         Events.initText(currmapacts[key].responses, key);
       }
     });

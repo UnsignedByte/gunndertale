@@ -3,11 +3,15 @@
  * @Date:   22:16:47, 24-Nov-2018
  * @Filename: init.js
  * @Last modified by:   edl
- * @Last modified time: 12:49:01, 24-Jun-2019
+ * @Last modified time: 21:45:29, 14-Aug-2019
  */
 
 
 //Init
+
+const SWITCH_DIRS = [2, 1, 3, 0];
+const BASE_FPS = 60;
+const TPS = 80;
 
 var mc;
 var lmd;
@@ -187,17 +191,9 @@ var KEY_NAMES = {
   "67":"c"
 }
 
-const SWITCH_DIRS = [2, 1, 3, 0];
-
-//Constants
-
-const BASE_FPS = 60;
-const TPS = 80;
-
 init();
 
 function init(){
-  /*Double size cuz stupid bug lol*/
   canv.width = window.innerWidth * 2;
   canv.height = window.innerHeight * 2;
 }
