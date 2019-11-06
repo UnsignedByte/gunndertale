@@ -3,7 +3,7 @@
 * @Date:   22:03:49, 24-Nov-2018
 * @Filename: map_data.js
  * @Last modified by:   edl
- * @Last modified time: 13:54:09, 24-Jun-2019
+ * @Last modified time: 12:35:58, 15-Oct-2019
 */
 
 var DEFAULT_LOCAL_MAP_DATA = {
@@ -39,6 +39,10 @@ var DEFAULT_LOCAL_MAP_DATA = {
     }
   },
   "bedroom":{
+    items:{},
+    containers:{}
+  },
+  "nbuilding":{
     items:{},
     containers:{}
   }
@@ -193,5 +197,9 @@ var MAP_DATA = {
         ]
       }
     }
+  },
+  "nbuilding": {
+    doors: {},
+    actions: {}
   }
 };

@@ -3,7 +3,7 @@
  * @Date:   21:59:40, 24-Nov-2018
  * @Filename: rendering.js
  * @Last modified by:   edl
- * @Last modified time: 19:27:28, 18-Jun-2019
+ * @Last modified time: 17:34:03, 05-Nov-2019
  */
 
 var Window = (function(){
@@ -181,6 +181,7 @@ var Effects = (function(){
 
   self.happiness = function(){
     fill_text("Happiness:"+Game.stats.happiness, Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
+    fill_text("Grade:"+Game.stats.grade, Vars.text.font_size/2, Vars.text.font_size*3*(68/91));
 
     for(let i = 0; i < Game.stats.cqueue.length; i++){
     fill_text(Game.stats.cqueue[i], Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91)*(i/2+2), null, Vars.text.font_size/2);
