@@ -43,8 +43,7 @@ var Window = (function(){
     drawImage(mc.currAnim, mc.pos);
     drawImage(MAP_DATA[mc.map].front, [0, 0]);
     renderObjects();
-    Effects.displaytime();
-    Effects.happiness();
+    Effects.displayText();
     Effects.timeOverlay();
   }
 
@@ -179,13 +178,22 @@ var Effects = (function(){
     }
   };
 
-  self.happiness = function(){
-    fill_text("Happiness:"+Game.stats.happiness, Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
-    fill_text("Grade:"+Game.stats.grade, Vars.text.font_size/2, Vars.text.font_size*3*(68/91));
+  self.displayText = function(){
+    context.fillStyle="white";
+    context.font = Vars.text.font_size.toString()+"px VT323";
+    fill_text("Sanity:"+Game.stats.happiness, Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
 
     for(let i = 0; i < Game.stats.cqueue.length; i++){
-    fill_text(Game.stats.cqueue[i], Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91)*(i/2+2), null, Vars.text.font_size/2);
+      fill_text(Game.stats.cqueue[i], Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91)*(i/2+2), null, Vars.text.font_size/2);
     }
+
+    //grade and time
+
+    context.textAlign = "right";
+    let t = secs2time(mc.time);
+    context.fillText(`${t.h}:${t.m}:${t.s}`, Window.width*Window.zoom-Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
+    context.fillText(`Grade:${Game.stats.grade||100}%`, Window.width*Window.zoom-Vars.text.font_size/2, Vars.text.font_size*3*(68/91));
+    context.textAlign = "left";
   };
 
   self.options = function(){
@@ -251,15 +259,6 @@ var Effects = (function(){
     }
     context.textAlign="left";
   };
-
-  self.displaytime = function(){
-    context.textAlign = "right";
-    context.font = Vars.text.font_size.toString()+"px VT323";
-    let t = secs2time(mc.time);
-    context.fillStyle="white";
-    context.fillText(`${t.h}:${t.m}:${t.s}`, Window.width*Window.zoom-Vars.text.font_size/2, Vars.text.font_size*1.5*(68/91));
-    context.textAlign = "left";
-  }
 
   self.container = function(){
     draw_bounded_box(Window.width*Window.zoom/2-Vars.inventory.box.width, Vars.inventory.box.margin, Vars.inventory.box.width*2, Window.height*Window.zoom-2*Vars.inventory.box.margin);

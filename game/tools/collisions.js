@@ -77,11 +77,12 @@ var Collision = (function(){
                       mc.currAnim.height+ 2*rects.mdst).data;
     rects.re = get_footrect(1);
     rects.ore = get_footrect(1, "objmap");
+    rore = rects.re;
     rects.zdr = get_dir(0);
-    return [rects.re[0].includes(0) || !rects.ore[0].includes(0xffffff),
-            rects.re[1].includes(0) || !rects.ore[1].includes(0xffffff),
-            rects.re[2].includes(0) || !rects.ore[2].includes(0xffffff),
-            rects.re[3].includes(0) || !rects.ore[3].includes(0xffffff)]
+    return [rects.re[0].includes(0) || rects.ore[0].some(x=>x!==0xffffff),
+            rects.re[1].includes(0) || rects.ore[1].some(x=>x!==0xffffff),
+            rects.re[2].includes(0) || rects.ore[2].some(x=>x!==0xffffff),
+            rects.re[3].includes(0) || rects.ore[3].some(x=>x!==0xffffff)]
   };
 
   self.check_doors = function(){
@@ -116,8 +117,9 @@ var Collision = (function(){
 
   self.check_objects = function(){
     let currobjs = MAP_DATA[mc.map].objects;
+    console.log(rects.ore);
     for(let i = 0; i < currobjs.length; i++){
-      if (check_in_dir(1, i, undefined, undefined, Game.map.objmap)){
+      if ([...rects.ore.map((x)=>x.includes(0))].some(x=>x===true)){
         Game.curr_obj = currobjs[i];
         Events.initText(OBJ_DATA[currobjs[i].type].responses);
       }
